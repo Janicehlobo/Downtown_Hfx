@@ -16,12 +16,6 @@ username.txt -> Database username
 
 3. Create initial admin user
 
-The following SQL commands need to be run on the database:
-
-INSERT INTO user (firstName, lastName, email, password, ustatus, createdAt, telephone)VALUES ('admin' , 'admin', 'matt.triff@gmail.com', '$2y$10$9PSQ6k4llP58HTBQEfABKezqIYOoaBrw56sZMdBsxaZkv4Y/oVz6m', 'active', '2016-08-15' , '902');
-
-INSERT INTO access (role, createdAt, user_iduser) VALUES ('admin', '2016-08-15' , (select iduser from user where email='matt.triff@gmail.com'));
-
 4. Apply permission to temporary reports folder
 
 This command gives full permissions to the temporary reports folder. This is required to send the reports by email. The reports are temporarily storing the PDF file in that folder. After sending the email as an attachment this file will automatically be deleted from reportsTemp directory.
