@@ -1,0 +1,15 @@
+  #cpi {
+  	width: 100%;
+  }
+
+  #ifm {
+    height: 100vh; /* For 100% screen height */
+    width:  100vw; /* For 100% screen width */
+    /*z-index: -100;*/
+  }
+
+  #loading {
+  	padding-top: 25px;
+  	width: 50%;
+  	margin: 0 auto;
+  }

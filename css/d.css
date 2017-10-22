@@ -1,0 +1,320 @@
+@media (min-width: 600px) {
+  div {
+       border: none !important;
+       }
+  table {
+        border: solid 2px #808080;
+        border-radius: 5px; 
+        margin: auto;
+        width: 80%;
+        }
+
+  th { 
+       border-bottom: 1px solid #d6d6d6;
+       height: 40px ;
+       background-color: #B8DC07; 
+       color: white; font-family: "aktiv-grotesk",sans-serif !important;
+       text-shadow: 0px 0px white;
+       font-weight: normal;
+      }
+  tr {
+      font-family: "aktiv-grotesk",sans-serif !important; 
+      text-align: center;  
+      }
+  tr:nth-child(even) {
+      background: #f7fffd;
+      }
+  tr:nth-child(odd) {
+      background: #D2FA89;
+      }
+  #star {
+    color: red
+   }
+
+   .report-but{/*report buttons in report pages*/
+    width: 100%;
+    margin: auto;
+   }
+   .button-rpt{
+    width :20%;
+    margin: auto;
+
+   }
+
+  fieldset.relative { /*?*/
+    width: 900px;
+    margin: 0 auto;
+     }
+
+  .right {
+    display: inline; 
+    float: right; 
+    margin-top: 20px;
+    margin-bottom: 20px
+      }
+  .left {
+    display: inline;
+    margin-top: 20px; 
+    margin-bottom: 20px
+   }
+
+  .button {   
+    width :40%;
+    margin: 0 auto;
+     }
+  .fpagebutton{/* buttons on first page*/
+    width :70%;
+    margin: 0 auto;
+  }
+
+  .fs-login >.ui-input-text { /* Login page */
+      width: 75% !important;
+       height: 40px; 
+       margin: auto;
+        }
+
+  fieldset.fs-login { /* Login page */
+    border: solid #d6d6d6 1px;
+     height: 35%; 
+     width: 30%; 
+     border-radius: 8px; 
+     background-color: #D5E14D;
+     margin: 0 auto; 
+     padding-top: 35px; 
+     text-align: center; 
+     padding-bottom: 15px;
+
+   }
+  #frmfpage {/*fpage*/
+    width:40%;
+     margin: 0 auto; 
+     margin-top: 50px;
+     
+   }
+  #passcode {/*fpage*/
+    text-align: center;
+  }
+  .save-cancel-button { /* cancel & save buttons div in all pages*/
+    width: 30%;
+     margin: 0 auto;
+     margin-top: 50px;
+     border: black solid 3px;
+   }
+  #accept-cancel-button{
+    width: 35%; 
+    margin: 0 auto;
+     }
+  #enter-edit-data {/*User profile page; add coop button*/
+    width: 100%; 
+    margin: 0 auto; 
+    margin-top: 70px;
+  }
+  #frmprofile{
+    width: 100%;
+  }
+  #kpilist { /*Data entry page, kpi div*/
+     width: 50%;
+     margin: 0 auto;
+     margin-top: 5%;
+     background-color: #F5F5F5; 
+     border-radius: 10px
+   }
+  #kpilistEdit{/*Data edit page, kpi div*/
+    width: 50%;
+    margin: 0 auto; 
+    margin-top: 5%;
+    background-color: #F5F5F5; 
+    border-radius: 10px
+  }
+
+  input.data { /*Data entry page; format inputs for KPI data*/
+    width: 40%; 
+    height: 9%; 
+    border-radius: 5px;
+  }
+  input.title {/*Data entry page; format inputs for KPI title*/
+    width: 40%; 
+    height: 9%; 
+    border-radius: 5px ;
+    background-color: #F5F5F5; 
+    border: none; 
+    text-align: center; 
+    font-weight: bold; 
+    border: 2px solid gray; 
+    margin-left: 10%
+  }
+
+  #adminMenu, #userMenu {/*menu panel*/
+    width: 30%;
+    margin: 0;
+    padding: 0;
+     }
+  ul { /*menu list*/
+      line-height:30px; 
+      background-color:#D5E14D; 
+      height:100%; 
+      width:100%; 
+      left: 0px;
+      padding: 0;
+      position: fixed;
+      margin: 0;
+      color: white; 
+      list-style-type: none;
+      font-size: 100% ; 
+      text-align: center;
+      font-family: "aktiv-grotesk",sans-serif !important;
+        }
+  li a { 
+    display: block; 
+    color:#8A084B ; 
+    padding: 8px 0 8px 16px; 
+    text-decoration: none;  
+	border-bottom: 1px solid #ffffff;
+     }
+  li a:hover { 
+    background-color:#3388CC ; 
+    color: white !important;
+      }
+
+  .menu { /*menu button position in header*/
+    left: 4%;
+  }
+  #btnlogout{ /*logout button position in header*/
+  margin-right: 4%;
+  }
+  .reportBut { /*Admin & user main report page; report options button*/
+    width: 80% !important;
+  }
+  .dataBut {/*Data entry menu page; option buttons*/
+    width: 60% !important;
+     }
+  .report_fs { /*Admin & user main report page; report options area*/
+    width: 60% !important; 
+    margin-left: 20% !important;
+     }
+  #data_div { /*Data entry menu page*/
+    width: 60% !important; 
+    margin: auto;
+    margin-left: 25%;
+    margin-top: 3%;
+  }
+  #changepassEmail{/*forget password page; email input*/
+    width: 70% ; 
+    margin: 0 auto;
+     }
+  #acceptEmail{/*terms & conditions page; email input*/
+    width: 50% ; 
+    margin: 0 auto;
+  }
+
+  #note { /*  note that explains fields with star sign are mandatory*/
+    margin: auto;
+  }
+
+  #comment_fs { /*fieldset in admin comment page*/
+    width: 90% ;
+    height: 90%;
+    margin: auto;
+    font-weight: bold;
+    text-align: center;
+    }
+  #comment_but { /*button to post admin comment to user home page in admin comment page*/
+    margin-top: 1%; 
+    margin-left: 30%;
+    width: 30%;
+  }
+  #admCommentForUser { /*Text area in admin comment page*/
+    width:80%; 
+     height:40%;
+     margin-left: 10%;
+      }
+  #KPIDefinitionList{/*User KPI definition page*/
+    width: 80% ; 
+    margin: 0 auto; 
+    background-color:#A9A9A9;
+    border-radius: 5px; 
+    border: 2px solid #A9A9A9 !important;
+   }
+  .center {/*User profile page; coop list*/
+    width: 80%; 
+    margin: auto;
+    margin-top: 40px;
+    border: 2px solid gray !important; 
+    border-radius: 5px
+  }
+  #userhometermcondition {/* Terms & conditions in user home page*/
+    border: solid gray 2px !important;
+    width: 80%;  
+    height: 30%; 
+    margin: auto; 
+    border-radius: 5px;
+    text-align: left; 
+    line-height: 40px;
+    padding:5px;
+    }
+    #usertermcondition {/* User Terms&conditions page*/
+    border: solid gray 2px !important;
+    width: 80%;  
+    height: 30%; 
+    margin: auto; 
+    border-radius: 5px;
+    text-align: left; 
+    line-height: 40px;
+    padding:3px;
+    }
+    #borderline{
+      border: solid gray 0.5px !important;
+    }
+   
+    .leg{/* Terms & conditions in user home page; bold font for legend*/
+      font-weight: bold;
+      /*line-height: 1;*/
+    }
+    
+  #commentLable{
+    border: solid gray 2px !important;
+    width: 80%;  
+    height: 30%; 
+    margin: auto; 
+    border-radius: 5px;
+    text-align: left; 
+    line-height: 40px;
+    padding:5px;
+    }
+  .email_div {
+    width: 500px !important;
+    margin-left: 400px !important;
+  }
+  .download_div {
+    width: 700px !important;
+    margin-left: 250px !important; 
+    margin-top: 50px; 
+    font-weight: bold
+  }
+  #termcondition{
+    border: solid gray 2px !important; 
+    width: 80%; 
+    height: 60%; 
+    margin: auto;
+    top: 0px;
+    border-radius: 5px; 
+    text-align: center; 
+    line-height: 40px
+  }
+  #adminhp{
+    width: 80%;
+    border: solid gray 2px !important; 
+    margin: auto;
+    margin-top: 3%;
+    border-radius: 5px;
+  }
+  #userhp{
+    width: 80%;
+    border: solid gray 2px !important; 
+    margin: auto;
+    margin-top: 3%;
+    border-radius: 5px;
+
+  }
+
+}

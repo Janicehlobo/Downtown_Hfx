@@ -1,0 +1,12 @@
+--  Colour schemes/themes and look/feel a bit unprofessional
+    --  Could model after their business site (http://halifaxchamber.com/)?
+        --  They have "MENU" (caps) right-aligned (not left)
+        --  Use more similar font-face?
+--  Design on "Membership data entry" page collapses for smaller resolutions (width < 448px)
+--  Membership data entry page doesn't have the menu at the top left, feels a bit inconsistent
+--  Interaction inconsistency of Pop-up vs page/mode: some sub-menus bring up pop-ups but some just opens pages
+
+
+To follow up on the colour schemes/theme point, you can define a new theme (colours, fonts, button styles, etc) for 
+jQuery Mobile using the ThemeRoller: https://themeroller.jquerymobile.com/. 
+Instructions on how to use it are available here: https://learn.jquery.com/jquery-mobile/theme-roller/.

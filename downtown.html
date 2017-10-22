@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+
+<head>
+  <!--Adjusting the page on mobile screen  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta charset="utf-8" >
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css"/>
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <link rel="stylesheet" type="text/css" href="css/d.css">
+  <link rel="stylesheet" type="text/css" href="css/d-mobile.css">
+  <link rel="stylesheet" type="text/css" href="themes/test.css">
+  
+
+
+  <!-- JS - jQuery/jQuery Mobile -->
+  <script src="newscripts/js/jquery-1.12.4.min.js"></script>
+  <!--PROD import prejquerymobile-->
+  <!--DEV import prejquerymobile-->
+ <!--<script src="scripts/handleNewPassword.js"></script>-->
+ 
+  <script src="newscripts/js/chromeFileProtocolFix.js"></script>
+  <!--ENDDEV import prejquerymobile-->
+
+  <script src="newscripts/js/jquery.mobile-1.4.5.min.js"></script>
+  <script src="newscripts/js/jspdf.min.js"></script>
+  <script src="newscripts/js/jspdf.plugin.autotable.js"></script>
+  <!--PROD import cpi-->
+  <!--DEV import cpi-->
+  
+    <script src="newscripts/js/report.js"></script>
+     <script src="newscripts/js/showUsers.js"></script>
+    <script src="newscripts/js/addbusinessdropdown.js"></script>	
+    <script src="newscripts/js/addbusinesstype.js"></script>	
+	<script src="newscripts/js/addmonthrange.js"></script>
+	<script src="newscripts/js/addnewkpi.js"></script>
+	
+	<script src="newscripts/js/cancelbackdataentry.js"></script>
+	<script src="newscripts/js/checkuseremail.js"></script>
+	<script src="newscripts/js/checkuserform.js"></script>
+	<script src="newscripts/js/companyreport.js"></script>
+	<script src="newscripts/js/dataentry.js"></script>
+	<script src="newscripts/js/dataedit.js"></script>
+	<script src="newscripts/js/deleteuser.js"></script>
+	<script src="newscripts/js/forgotpassword.js"></script>
+	<script src="newscripts/js/getbusinessdropdown.js"></script>
+	<script src="newscripts/js/getcompanyeditpage.js"></script>
+	<script src="newscripts/js/getcurrentmonthrange.js"></script>
+	<script src="newscripts/js/getcurrentmonthrangeeditpage.js"></script>
+	<script src="newscripts/js/getcurrentyear.js"></script>
+	<script src="newscripts/js/getkpidataedit.js"></script>
+	
+	<script src="newscripts/js/getselectedkpi.js"></script>
+	<script src="newscripts/js/getusercompany.js"></script>
+	<script src="newscripts/js/logout.js"></script>
+	<script src="newscripts/js/resetpassword.js"></script>
+	<script src="newscripts/js/showkpi.js"></script>
+	<script src="newscripts/js/showkpidata.js"></script>
+	<script src="newscripts/js/showkpidataedit.js"></script>
+	<script src="newscripts/js/showkpidataentry.js"></script>
+	<script src="newscripts/js/userlogin.js"></script>
+	<script src="newscripts/js/userprofile.js"></script>
+	
+	
+  <!--ENDDEV import cpi-->
+  
+  <script>
+    $(document).ready(function() {
+      $("#userMenu").panel().enhanceWithin();
+      $("#adminMenu").panel().enhanceWithin();
+    });
+  </script>
+  <script>
+    $(document).ready(function(){
+    $('#btnEnter').keypress(function(e){
+      if(e.keyCode==13)
+      $('#btnEnter').click();
+    });
+   });
+  </script>
+ 
+  </head>
+
+<body>
+  <!-- Start of login page -->
+  <div data-role="page" id="login">
+
+    <div data-role="header" class="header">
+  
+      <h1><img src="css/images/updatedImage.png" width="410" height="110"> </h1>
+    </div> 
+  
+     <form id="frmLogin" >
+      <div data-role="fieldcontain">
+
+     <fieldset  class="fs-login">
+     
+      <input type="email" id="email" name="email"  placeholder="Email" autofocus required></input><br>
+      <input type="password" id="password"  name="password"  placeholder="Password" required ></input><br>
+      <a href="" data-role="button" class="button"  onclick="loginInput();" id="btnEnter" data-icon="arrow-r" data-iconpos="right" type="submit">Login</a> <br/>
+	   
+       <a href="#newuser" id="newuser" data-inline="true" data-role="button" data-mini="false" data-icon="user" data-iconpos="right" class="button">Create Business </a><br/><br/>
+    <a href="#resetpassword" id="resetpassword" data-inline="true"  data-role="none" data-mini="false"> Reset Password</a> &nbsp;&nbsp;
+	   <a href="#getpassword" id="getpassword" data-inline="true"  data-role="none" data-mini="false"> Forgot Password</a>
+     </fieldset>
+      </div>  
+	  
+      </form>
+  </div>
+  <!-- End of login page -->
+
+
+  
+
+
+  <!--forget password page -->
+  <div data-role="page" id="getpassword" data-close-btn="none">
+    <div data-role="header" class="header" >
+      <h1>Get password</h1>
+    </div>
+    <div data-role="content">
+      <form >
+      <div id="changepassEmail">
+      Please enter your email :
+      <input type="email" id="forgotEmail"  autofocus required></input>
+      </div>
+      <div class="save-cancel-button">
+        <a  onclick= "forgotPassword();" data-role="button" data-inline="true"   class="" type="submit" id="submitemail" data-icon="check" data-iconpos="right">Send Password</a> &nbsp;&nbsp;
+        <a href="#login" data-role="button" data-inline="true" data-inline="true" class="" data-icon="delete" data-iconpos="right">Cancel</a>
+      </div>
+      </form>
+    </div>
+  </div>
+
+  <!--Reset password page -->
+  <div data-role="page" id="resetpassword" data-close-btn="none">
+    <div data-role="header" class="header">
+      <h1>Set new password</h1>
+    </div>
+    <div data-role="content">     
+      <br>
+      <form id="frmNewPassword">  
+	  <div data-role="fieldcontain">
+          <label for="existingEmail" align="right"> Email<span id="star">*</span> :  </label>
+          <input type="text" placeholder="Email" name="exisitngEmail"   data-mini="false" id="existingEmail"  >
+        </div>
+		<div data-role="fieldcontain">
+          <label for="currPassword" align="right"> Current password<span id="star">*</span> :  </label>
+          <input type="password" placeholder="Current password" name="currPassword"   data-mini="false" id="currPassword"  >
+        </div>
+
+      <div data-role="fieldcontain">
+          <label for="newPassword" align="right"> New password<span id="star">*</span> :  </label>
+          <input type="password" placeholder="New password" name="NewPassword"   data-mini="false" id="NewPassword"  >
+        </div>
+        
+        <center><a  data-role="button"  data-iconpos="right" class="" data-inline="true" id="submitPassword" data-icon="check" onclick="resetPassword()">Submit</a> &nbsp;&nbsp;     
+        <a href="#login" data-role="button" data-inline="true" data-inline="true" class="" data-icon="delete" data-iconpos="right">Cancel</a></center>
+      
+		</form>
+    </div>
+  </div>
+
+
+  <!--New user page -->
+  <div data-role="page" id="newuser" data-close-btn="none">
+    <div data-role="header" class="header">
+      <h1>New user</h1>
+    </div>
+    <div data-role="content">
+      <br>
+      <form id="nUser" action="#" method="post" >
+        <div data-role="fieldcontain">        
+          <label for="txtRegisterfname" align="right"> First Name<span id="star">*</span>: </label>
+          <input type="text" placeholder="First Name"  data-mini="false" id="txtRegisterfname" autofocus required>
+        </div>
+         <div data-role="fieldcontain">        
+          <label for="txtRegisterlname" align="right"> Last Name<span id="star">*</span> : </label>
+          <input type="text" placeholder="Last Name"  data-mini="false" id="txtRegisterlname"  required>
+        </div>
+      <div data-role="fieldcontain">        
+          <label for="txtRegisterEmail" align="right"> Email<span id="star">*</span> : </label>
+          <input type="email" placeholder="Email" name="txtRegisterEmail"
+          data-mini="false" id="txtRegisterEmail"   required>
+        </div>
+        <div data-role="fieldcontain">        
+          <label for="txtRegisterlphone" align="right"> Phone Number<span id="star">*</span> : </label>
+          <input type="text" placeholder="Phone Number"  data-mini="false" id="txtRegisterlphone"  required>
+        </div>
+		<div data-role="fieldcontain">        
+          <label for="txtCompanyname" align="right"> Company name<span id="star">*</span> : </label>
+          <input type="text" placeholder="Company Name"  data-mini="false" id="txtCompanyname"  required>
+        </div>
+		<div data-role="fieldcontain">     
+          <label for="txtBusinesstype" align="right"> Business Type<span id="star">*</span> : </label>
+
+		  <select id="businesstype"  name="businesstype"  required>
+		  
+        <option>Please select</option>  
+             
+           </select> 
+        </div>
+        <div data-role="fieldcontain">
+          <label for="txtRegisterPassword" align="right"> Password<span id="star">*</span> :  </label>
+          <input type="password" placeholder="Password should have 5 to 10 characters" name="txtRegisterPassword"
+          data-mini="false" id="txtRegisterPassword" required>
+        </div>
+        <div data-role="fieldcontain">
+          <label for="cfmPassword" align="right"> Confirm password<span id="star">*</span> : </label>
+          <input type="password" placeholder="Confirm Password" name="txtConfirmPassword" data-mini="false" id="txtConfirmPassword" required>
+        </div>
+         <div class="save-cancel-button">
+         <a data-role="button" class="button" data-inline="true" onclick="checkUserEmail();" id="btnEnter" data-icon="check" data-iconpos="right" class="" name="submit" type="submit" >Register</a> &nbsp;&nbsp;
+         <a href="#login" data-role="button" data-inline="true" data-inline="true" class="" data-icon="delete" data-iconpos="right">Cancel</a><br><br>
+         <label id="note">Please note that all fields with "<span id="star">*</span>" are mandatory. </label>
+         </div>
+        </form>
+    </div>
+  </div>
+
+<!-- User Menu -->
+<div data-role="panel" data-theme="a" style="width=17em;" id="userMenu" data-display="overlay" name="menu" data-position="left" >   
+     <ul><h2>User Menu</h2> 
+         <li><a href="#userHomePage">Home</a></li>
+         <li><a href="#DataEntryMenu">Membership Data Entry</a></li>
+         <li><a href="#TermsConditions">Terms and Conditions</a></li>
+         <li><a href="#Profile" onclick="userProfile();">Profile</a></li> 
+                 
+     </ul>    
+</div>
+
+
+  <!--User(participant) Home Page -->
+
+  <div data-role="page" id="userHomePage" >
+    <div data-role="header" class="header">
+      <a href="#userMenu" class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a>  
+      <h1>User Home page</h1>    
+      <a onclick="logout()" data-role="button" id="btnlogout" data-icon="carat-d" data-iconpos="right">logout</a>
+      </div> <br/>
+    <form  method="post" id="frmuserHome" action="ShowComment.php"> 
+             
+           <fieldset id="userhometermcondition">
+            <legend class="leg">Terms and Conditions</legend>
+            Thank you for participating in the Performance Reporting project. By continuing to participate in this project you agree to the following Term and Conditions:<br>
+            - Your participation in the Performance Reporting project will be kept confidential.<br>
+            - All data will be held in a secure environment and used in aggregate form only. Individual responses will not be duplicated or shared. Each organization will have access to their detailed responses as well as aggregate outcomes.
+           </fieldset>
+           <fieldset id="userhp"> 
+             <legend><b>How To Use Application</b> </legend>
+              <div data-role="main" class="ui-content">
+              <div data-role="collapsible">
+                <h4> Initial Set-up</h4>
+                 <p> 
+                  Each user should register to a business to use the application.<br><br>
+                  </p>
+              </div>
+            <div data-role="collapsible">
+             <h4> Everyday use</h4>
+              <p><b>Membership Data Entry:</b><br>
+                <b>a.  Enter Data:</b> Menu -> Membership Data Entry -> Enter Data<br>
+                Before entering the data, look up for the Company name and year that is auto generated.<br>
+				Select the month range for which the data is to entered.<br>
+				Provide the data for the KPI displayed. <br>
+				Save the data for aggregate comparison <br>
+                <b>b.  Edit Data:</b>Menu -> Membership Data Entry -> Edit Data<br>
+                Edit data page, will allow you to view the previously entered data<br>
+				
+				<br>
+               <b>Terms and Conditions:</b><br>
+               This option can be used to view terms and conditions to use the application.<br><br>
+               <b>Profile</b><br>
+              Show the users profile, including company name and the business type. 
+			   </p>
+        </div>
+       </div> 
+       </fieldset> 
+       
+      </form> 
+    </div>    
+  
+
+<!-- Admin Menu -->
+
+<div  data-role="panel" data-theme="a" id="adminMenu" data-display="overlay" name="menu" data-position="left" > 
+     <ul> <h2>Admin Menu</h2> 
+         <li><a href="#adminHome">Home</a></li>
+        
+         <li><a href="#Users">User</a></li>
+         <li><a href="#Attribute">Add Attributes</a></li>
+         <li><a href="#AdminDataEntryMenu">Membership Data Entry</a></li>
+         <li><a href="#Report">Report</a></li>
+     </ul>  
+</div>
+
+
+
+
+<!--Admin-users Page to see users and change roles-->
+
+<div data-role="page" id="Users" action="" method=""  >
+
+    <div data-role="header" class="header">
+     
+       <a href="#adminMenu"  class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a>
+      <h1>Users Page</h1>
+      <a onclick="logout()" data-role="button"  id="btnlogout" data-icon="carat-d" data-iconpos="right">logout</a>     
+    </div>    
+
+    <div data-role="content">
+
+      <form id="frmUsersPage" action="" method="POST">  
+<div>
+  <p id="theUsers" >
+  </p> 
+</div>
+</form>
+
+<center>
+<a href="#adminHome" data-role="button" data-inline="true" data-inline="true" class="" data-icon="delete" data-iconpos="right">Cancel</a><br><br>
+         
+</center>
+
+</div>
+
+
+</div>
+
+<!--Admin - Edit Users Page -->
+
+<div data-role="page" id="editUser" >
+
+    <div data-role="header" class="header">
+  
+      <h1>Edit User Info</h1>
+    </div>    
+   
+ <form id="frmEditUsers" action="" method="">
+
+
+       <div data-role="fieldcontain">        
+          <input type="hidden"    id="txtIDUser"  >
+        </div>
+       
+       <div data-role="fieldcontain">        
+          <label for="txtfnameUser" align="right"> First Name : </label>
+          <input type="text"  data-mini="false" id="txtfnameUser"   autofocus >
+        </div>
+
+        <div data-role="fieldcontain">        
+          <label for="txtlnameUser" align="right"> Last Name : </label>
+          <input type="text"  data-mini="false" id="txtlnameUser"  >
+        </div>
+
+       <div data-role="fieldcontain">        
+          <label for="txtEmailUser" align="right"> Email : </label>
+          <input type="email"  data-mini="false" id="txtEmailUser"  onchange="ValidateEmail('txtEmailUser')"  >
+        </div>
+
+        <div data-role="fieldcontain">        
+          <label for="txtphoneUser" align="right"> Phone Number: </label>
+          <input type="number"  data-mini="false" id="txtlphoneUser"  >
+        </div>
+
+
+        <div data-role="fieldcontain">
+          <label for="txtroleuser" align="right"> Comapny Name :  </label>
+           <select id="txtroleuser" name="txtroleuser" required>
+               <option >Please select</option>
+               <option value="admin">Admin</option>
+               <option value="user">User</option>              
+            </select>
+        </div>
+
+        <div data-role="fieldcontain">
+           <label for="txtst" align="right"> Role :  </label>
+              <select id="txtsatauUser" name="txtsatauUser" required>
+               <option >Please select</option>
+               <option value="active">Active</option>
+               <option value="inactive">Inactive</option>              
+            </select>
+        </div>
+
+		
+		<!--EditUsers.php-->
+        <div data-role="fieldcontain">
+          <label for="txtcoop" align="right"> Business Type </label>
+          <select  id="btype" name="btype"  required ><br/>
+            <option>Please select</option>          
+          </select>
+        </div> 
+              
+      <div class="save-cancel-button">
+    <a data-role="button" data-inline="true" class="button" onclick="EditUserInfo()" id="btnEnter" data-icon="check" data-iconpos="right" type="submit">Save changes</a>
+    <a href="#Users" data-role="button" data-inline="true" class="button" data-icon="delete" data-iconpos="right">Cancel</a> </div>    
+
+
+</form>
+
+</div>
+</div>
+
+
+
+
+
+<!--User - Profile Page -->
+
+<div data-role="page" id="Profile" >
+    <div data-role="header" class="header">
+      <a href="#userMenu"  class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a>
+      <h1>Profile Page</h1>
+      <a onclick="logout()" data-role="button"  id="btnlogout" data-icon="carat-d" data-iconpos="right">logout</a>  
+    </div>
+    <div data-role="content">
+     
+   
+  
+      <br>
+      
+        <div data-role="fieldcontain">        
+          <label for="txteditfname" align="right"> First Name<span id="star">*</span>: </label>
+          <input type="text" placeholder="First Name"  data-mini="false" id="txteditfname" autofocus required>
+        </div>
+         <div data-role="fieldcontain">        
+          <label for="txteditlname" align="right"> Last Name<span id="star">*</span> : </label>
+          <input type="text" placeholder="Last Name"  data-mini="false" id="txteditlname"  required>
+        </div>
+      <div data-role="fieldcontain">        
+          <label for="txteditEmail" align="right"> Email<span id="star">*</span> : </label>
+          <input type="email" placeholder="Email" name="txteditEmail"
+          data-mini="false" id="txteditEmail"   required>
+        </div>
+        <div data-role="fieldcontain">        
+          <label for="txteditphone" align="right"> Phone Number<span id="star">*</span> : </label>
+          <input type="text" placeholder="Phone Number"  data-mini="false" id="txteditphone"  required>
+        </div>
+		<div data-role="fieldcontain">        
+          <label for="txteditCompanyname" align="right"> Company name<span id="star">*</span> : </label>
+          <input type="text" placeholder="Company Name"  data-mini="false" id="txteditCompanyname"  required>
+        </div>
+		<div data-role="fieldcontain">        
+          <label for="txteditBusinesstype" align="right"> Business Type<span id="star">*</span> : </label>
+          <input type="text" placeholder="Business Type"  data-mini="false" id="txteditBusinesstype"  required>
+        </div>
+	<center>	<a data-role="button" class="" data-inline="true" onclick="userUpdate();" id="editUser" data-icon="check" data-iconpos="right" class="" name="submit" type="submit" >Save Changes</a> &nbsp;&nbsp;
+         <a href="#userHomePage" data-role="button" data-inline="true" data-inline="true" class="" data-icon="delete" data-iconpos="right">Cancel</a><br><br>
+        
+		</center>
+		
+    </div>      
+</div>
+
+<!--User- edit profile -->
+
+<div data-role="page" id="editprofile" >
+
+    <div data-role="header" class="header">
+  
+   
+      
+      <h1>Edit Profile page</h1>
+    </div>    
+   
+ <form id="frmEditprofile" action="" method="">
+
+
+        <div data-role="fieldcontain">        
+          <input type="hidden"    id="txtEditproid"  >
+        </div>
+
+       <div data-role="fieldcontain">
+          <label for="txtEditCoopName" align="right"> Coop Name : </label>
+          <input type="text" name="txtEditproName" data-mini="false" id="txtEditproName"  >
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="txtEditindustry" align="right"> Industry : </label>        
+          <select id="txtEditindustrypro" name="txtEditindustrypro"   required>              
+         <option >Please select</option>
+          </select>
+        </div>  
+
+        <div data-role="fieldcontain">
+          <label for="txtEdittypepro" align="right"> Type : </label>
+          <select id="txtEdittypepro" name="txtEdittypepro" required>
+               <option >Please select</option>              
+          </select>
+        </div>
+         
+        <div data-role="fieldcontain">
+          <label for="txtEditpostalcode" align="right">Postal code : </label>
+          <input type="text"  name="txtEditpostalcodepro"
+          data-mini="false" id="txtEditpostalcodepro" placeholder="x3x 3x3" onChange="checkPostalCode(txtEditpostalcodepro, txtEditprovincepro , txtEditcountrypro );" >
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="txtEditprovince" align="right"> Province : </label>
+          <input type="text" name="txtEditprovincepro" data-mini="false" id="txtEditprovincepro" readonly  >
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="txtEditcountry" align="right"> Country :  </label>
+          <input type="text"  name="txtEditcountrypro" data-mini="false" id="txtEditcountrypro" readonly   >
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="txtEditlanguagepro" align="right"> Language :  </label>
+          <select id="txtEditlanguagepro" name="txtEditlanguagepr" required>
+               <option >Please select</option>
+               <option value="English"> English </option>
+               <option value="French"> French </option>
+          </select>
+        </div>        
+     
+    <div class="save-cancel-button">  
+    <a data-role="button" class="button" data-inline="true" onclick="EditproInfo()" id="btnEditprofile" type="submit">Save changes</a>
+    <a href="#Profile" data-role="button" data-inline="true" class="button" data-icon="delete" data-iconpos="right">Cancel</a>
+  </div>
+
+</form>
+</div>
+
+<!--User-edit profile page-->
+
+<div data-role="page" id="editprofileuser" >
+    <div data-role="header" class="header">
+      <h1>Edit User page</h1>
+    </div>    
+ <form id="frmEdituser" action="" method="">
+        <div data-role="fieldcontain">        
+          <input type="hidden"    id="txtEditproiduser"  >
+        </div>
+       <div data-role="fieldcontain">
+          <label for="txtEditFirstname" align="right"> First Name : </label>
+          <input type="text" name="txtEditfirstname" data-mini="false" id="txtEditfirstname"  >
+        </div>
+        <div data-role="fieldcontain">
+          <label for="txtEditlastname" align="right"> Last Name : </label>
+          <input type="text" name="txtEditlastname" data-mini="false" id="txtEditlastname"  >
+        </div>
+        <div data-role="fieldcontain">
+          <label for="txtEditemail" align="right"> Email : </label>
+          <input type="text" name="txtEditemail" data-mini="false" id="txtEditemail" onchange="ValidateEmail('txtEditemail')"  >
+        </div>
+        <div data-role="fieldcontain">
+          <label for="txtEditphone" align="right"> Phone Number : </label>
+          <input type="text" name="txtEditphone" data-mini="false" id="txtEditphone"  >
+        </div>
+        <div class="save-cancel-button">  
+          <a data-role="button" class="button" data-inline="true" onclick="EdituserInfo()" id="btnEdituserProfile" type="submit">Save changes</a>
+          <a href="#Profile" data-role="button" data-inline="true" class="button" data-icon="delete" data-iconpos="right">Cancel</a>
+       </div>
+ </form>
+</div>
+
+<!--Admin - Data Entry menu -->
+
+<div data-role="page" id="AdminDataEntryMenu" >
+     <div data-role="header" class="header">
+      <a href="#adminMenu" class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a> 
+      <h1>Membership Data Entry</h1>
+      <a onclick="logout()" data-role="button"  id="btnlogout" data-icon="carat-d" data-iconpos="right">logout</a>
+     </div> 
+     <form id="frmDataEntryMenu"> 
+       <div id="data_div">
+	   <a href="#DataEntryPage" onclick="getYear();getCompany();showKPIData();" class="dataBut"  data-role="button" class="button" data-iconpos="right"  data-icon="plus">Enter Data</a> 
+      
+        <!--<a onclick="showKPI();"  class="dataBut" data-role="button" class="button" data-iconpos="right"  data-icon="plus">Enter Data</a>-->
+        <a href="#DataEditPage" onclick="getYear();editgetCompany();editAllKPI();" class="dataBut"  data-role="button" class="button" data-iconpos="right"  data-icon="plus">Edit Data</a> 
+      </div>
+     </form>
+</div> 
+
+<!--User - Data Entry menu -->
+
+<div data-role="page" id="DataEntryMenu" >
+    <div data-role="header" class="header">
+      <a href="#userMenu" class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a> 
+      <h1>Membership Data Entry Menu</h1>
+      <a onclick="logout()" data-role="button"  id="btnlogout" data-icon="carat-d" data-iconpos="right">logout</a>
+     </div> 
+     <form id="frmDataEntryMenu" action="" method="post">
+      <div id="data_div">
+      <a href="#DataEntryPage" onclick="getgetYear();getCompany();showKPIData();" class="dataBut"  data-role="button" class="button" data-iconpos="right"  data-icon="plus">Enter Data</a> 
+      <a href="#DataEditPage" onclick="getYear();editgetCompany();editAllKPI();" class="dataBut"  data-role="button" class="button" data-iconpos="right"  data-icon="plus">Edit Data</a> 
+      </div> 
+     </form>
+    </div>  
+
+
+ <!--User/admin - Data Entry Page -->
+
+  <div data-role="page" id="DataEntryPage" >
+    <div data-role="header" class="header"  >
+	<a style="visibility: hidden"> </a>
+	
+	  <h1>Membership Data Entry Page</h1> 
+<a onclick="logout()" data-role="button" align="right" id="btnlogout" data-icon="carat-d" data-iconpos="right">logout</a>	  
+    </div>  
+    <form id="frmDataEntryPage" action="" method="post"> 
+         <div data-role="fieldcontain">
+		    <label for="Company name" align="right"> Company Name<span id="star">*</span> :  </label>
+      <input type="text" id="userCompany" name="userCompany"  autofocus required></input><br>
+	  </div>
+		<div data-role="fieldcontain">
+		    <label for="Year" align="right"> Year<span id="star">*</span> :  </label>
+      <input type="text" id="dataYear" name="dataYear"  autofocus required></input><br>
+	  </div>
+        
+		   <div data-role="fieldcontain">
+           <label for="month" align="right"> Month range<span id="star">*</span> :  </label> 
+           <select id="getMonthRange" name="getMonthRange"  required> 
+             <option> Please select </option>
+           </select> 
+		   </div>
+		  
+	  
+	  
+		   <br/><br/>
+              <fieldset class="report-fs">
+        <p id="kpilist" >
+        </p>
+      </fieldset>
+        <div class="save-cancel-button">
+          <a  data-role="button" class="" data-inline="true" type="submit" id="btnsave" onclick="addBusinessDetails();" data-icon="check" data-iconpos="right">Save</a>
+          <a  data-role="button" class="" data-inline="true" type="submit" id="btncancel" onclick="cancelBackDataEntry();" data-icon="delete" data-iconpos="right">Cancel</a> 
+          
+		</div>   
+    </form>  
+  </div>  
+
+ 
+
+
+  
+  
+ <!--User/admin - Data Edit Page -->
+
+  <div data-role="page" id="DataEditPage" >
+
+    <div data-role="header" class="header">
+	
+	<a style="visibility: hidden"> </a>
+      <h1>Membership Data Edit Page</h1>   
+	  <a onclick="logout()"  data-role="button"  id="btnlogout" data-icon="carat-d" data-iconpos="right">logout</a>	  
+ 
+    </div>  
+    <form id="frmDataEntryPage" action="" method="post"> 
+         <div data-role="fieldcontain">
+		    <label for="Company name" align="right"> Company Name<span id="star">*</span> :  </label>
+      <input type="text" id="edituserCompany" name="edituserCompany"  autofocus required></input><br>
+	  </div>
+		<div data-role="fieldcontain">
+		    <label for="Year" align="right"> Year<span id="star">*</span> :  </label>
+      <input type="text" id="editdataYear" name="editdataYear"  autofocus required></input><br>
+	  </div>
+        
+		   <div data-role="fieldcontain">
+           <label for="month" align="right"> Month range<span id="star">*</span> :  </label> 
+           <select id="editgetMonthRange" name="editgetMonthRange"  required> 
+             <option> Please select </option>
+           </select> 
+		   </div>
+		  
+	  
+	  
+		   <br/><br/>
+              <fieldset class="report-fs" >
+        <p id="editkpilist" >
+        </p>
+      </fieldset>
+        <div class="save-cancel-button">
+          <a  data-role="button" class="" data-inline="true" type="submit" id="btnsave" onclick="editaddBusinessDetails();" data-icon="check" data-iconpos="right">Save</a>
+          <a  data-role="button" class="" data-inline="true" type="submit" id="btncancel" onclick="cancelBackDataEntry();" data-icon="delete" data-iconpos="right">Cancel</a> 
+          
+		</div>   
+    </form>  
+  </div>  
+
+ 
+ 
+  <!--User - Terms & condition Page -->
+  
+  <div data-role="page" id="TermsConditions" >
+    <div data-role="header" class="header">
+      <a href="#userMenu" class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a>
+      <h1>Terms and Conditions page</h1>
+      <a onclick="logout()" data-role="button"  id="btnlogout" data-icon="carat-d" data-iconpos="right">logout</a>
+    </div>    
+    <div data-role="content">
+      <form id="" action="">
+      <div data-role="fieldcontain">        
+      <div data-role="fieldcontain">          
+           <fieldset id="usertermcondition" >
+            <legend class="leg">Terms and Conditions</legend>
+            Thank you for participating in the Performance Reporting project. By continuing to participate in this project you agree to the following Term and Conditions:<br>
+            - Your participation in the Performance Reporting project will be kept confidential.<br>
+            - All data will be held in a secure environment and used in aggregate form only. Individual responses will not be duplicated or shared. Each organization will have access to their detailed responses as well as aggregate outcomes.<br>
+            <h2 id="borderline"></h2>
+            If you have any questions or concerns, please contact XXXXXX at xxxxxx@smu.ca. 
+           </fieldset>
+        </div>     
+      </div>  
+      </form> 
+    </div>    
+  </div>
+
+   <!--Admin Add Attribute -->
+
+ <div data-role="page" id="Attribute" >
+    <div data-role="header">
+       <a href="#adminMenu" class="menu" data-role="button" data-iconpos="right"  data-icon="bars">Menu</a>
+      <h1>Add Attribute Page</h1>
+      <a onclick="logout()" data-role="button" id="btnlogout" data-icon="carat-d" data-iconpos="right">logout</a>
+    </div>  <br>   
+<form  id="attributes" >
+<div>  
+      <a href="#myPopupDialogInd" data-rel="popup" data-position-to="window" data-transition="fade" 
+	  data-role="button" class="button">Add new KPI</a>
+      </div> 
+	  
+	  
+        <div data-role="popup" id="myPopupDialogInd" data-history="false">
+       <div data-role="header">
+       <h1>Type</h1>
+       </div>
+ <form  id="type" name = "Indform" >
+   <div data-role="main" class="ui-content">
+       <h2>Add a new KPI</h2>
+   <input type="text" name="newkpiVal"  id="newkpiVal" autofocus required></input>    
+   <a type="submit" name="Submit" class="button" onclick="addnewKPI()" data-role="button" >Add</a>   
+   <a data-role="button"  id="btnEnter" class="button" type="submit" href="#Attribute">Cancel</a>
+   </div>
+</form>
+ </div>
+ 
+ <!-- Select KPI -->
+ 
+ <div>  
+      <a onclick="showKPIView()" data-role="button" class="button">Select KPI</a>
+      </div>
+	
+  
+<div>     
+      <a href="#myPopupDialogtype" data-rel="popup"  data-position-to="window" data-transition="fade" 
+	  data-role="button" class="button">Add Month Range</a>    
+      </div>
+        <div data-role="popup" id="myPopupDialogtype" data-history="false">
+       <div data-role="header">
+       <h1>Month</h1>
+       </div>
+ <form id="type" name = "typeform" >
+   <div data-role="main" class="ui-content">
+       <h2>Add a Month range</h2>
+   
+   	   <label for="txtMonth" align="left"> Select month range<span id="star">*</span> :  </label>
+  <select  id="monthRange" name="monthRange"  required ><br/>
+            <option >Please select</option> 
+               <option value="Halfyearly">Halfyearly</option>
+               <option value="Quarterly">Quarterly</option>
+			
+          </select>
+   
+   <a type="submit" name="Submit" class="button" onclick="InsertMonth()" data-role="button" >Add</a>    
+   <a data-role="button"  id="btnEnter" class="button" type="submit" href="#Attribute">Cancel</a>
+   </div>
+</form>
+ </div>
+<div>  
+      <a href="#myPopupDialogcat" data-rel="popup" data-position-to="window" data-transition="fade" 
+	  data-role="button" class="button">Add Business type</a>
+      </div>
+        <div data-role="popup" id="myPopupDialogcat" data-history="false">
+       <div data-role="header">
+       <h1>Business Type</h1>
+       </div>
+ <form  id="categoryform" name = "catform" >
+   <div data-role="main" class="ui-content">
+       <h2>Add a new Business Type</h2>       
+<input type="text" name="AddBtype"  id="AddBtype" autofocus required></input>
+   <a type="submit" name="Submit" class="button" onclick="InsertBtype()" data-role="button" >Add</a>    
+   <a data-role="button"  id="btnEnter" class="button" type="submit" href="#Attribute">Cancel</a>
+   </div>
+</form>
+ </div>
+<div>
+<p id="demo" >
+        </p>
+</div>
+
+ 
+ <!-- Edit page -->
+ 
+ <div id="Attributestable">
+   </div>
+  </form>
+  </div>
+</div>  
+
+  <!-- Admin Home page -->
+ <div data-role="page" id="adminHome" >
+    <div data-role="header" class="header">
+      <a href="#adminMenu"  class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a>
+      <h1>Admin Home page</h1>
+      <a onclick="logout()" data-role="button" id="btnlogout" data-icon="carat-d" data-iconpos="right">logout</a>
+    </div>    
+    <div data-role="content">
+<fieldset id="adminhp"> 
+      <legend><b>How To Use Application</b> </legend>
+       <div data-role="main" class="ui-content">
+         <div data-role="collapsible">
+                <h4> Initial Set-up</h4>
+                 <p> 
+                  Admin has to login with the Admin User ID and password.<br><br>
+				  Admin will be able to add attributes, select attributes and view reports<br><br>
+                  </p>
+              </div>
+            <div data-role="collapsible">
+             <h4> Everyday use</h4>
+              <p><b>Membership Data Entry:</b><br>
+                <b>a.  Enter Data:</b> Menu -> Membership Data Entry -> Enter Data<br>
+                Before entering the data, look up for the Company name and year that is auto generated.<br>
+				Select the month range for which the data is to entered.<br>
+				Provide the data for the KPI displayed. <br>
+				Save the data for aggregate comparison <br>
+                <b>b.  Edit Data:</b>Menu -> Membership Data Entry -> Edit Data<br>
+                Edit data page, will allow you to view the previously entered data<br>
+				Any changes can be updated to data retrieved.
+				<br>
+               <b>Terms and Conditions:</b><br>
+               This option can be used to view terms and conditions to use the application.<br><br>
+			   <b>Add Attributes:</b><br>
+               <b>a.  Add KPI:</b> Menu -> Add Attributes -> Add KPI<br>
+                Admin can add KPI as requirement arise.<br>
+                <b>b.  Select KPI:</b>Menu -> Add Attributes -> Select KPI<br>
+                A table containing all the KPI will appear, allowing the Admin to select the required KPI's for data collection<br>
+				
+				
+				<b>c.  Add Month Range:</b> Menu -> Add Attributes -> Add Month Range<br>
+                
+				Month range can be selected depending on the month range the Admin wants to collect data for. <br>
+                <b>d.  Add Business Type:</b>Menu -> Add Attributes -> Add Business Type<br>
+                New Business Type can be added by the Admin using this option.
+				<br>
+               <b>User:</b><br>
+              Show the users details, including company name and the business type. 
+			   </p>
+        </div>
+       </div> 
+       </fieldset> 
+    </div>    
+  </div>
+  
+  
+   <!-- Admin Comment Page -->
+
+  <div data-role="page" id="adminComment" >
+    <div data-role="header" class="header">
+      <a href="#adminMenu" class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a>     
+      <h1>Admin Comment page</h1>
+      <a onclick="logout()" data-role="button"  id="btnlogout" data-icon="carat-d" data-iconpos="right">logout</a>
+    </div>    
+    <div data-role="content">
+      <form method="post" id="frmuserHomePage" > 
+        <fieldset data-role="fieldcontain" id="comment_fs">
+          <label for="admCommentForUser" id="commentnote" >Please write comment in the box: </label><br>
+          <textarea cols="100" rows="10" id="admCommentForUser"  ></textarea><br>
+           <a type="submit" onclick="InsertComment()" id="comment_but" data-role="button">Post to User Home Page</a>   
+        </fieldset> 
+      </form> 
+    </div>    
+  </div>
+
+<!-- Admin Report Page -->
+  <div data-role="page" id="Report" >
+    <div data-role="header" class="header">
+      <a href="#adminMenu" class="menu" data-role="button" data-iconpos="right"  data-icon="bars">Menu</a>     
+      <h1>Report page</h1>
+      <a onclick="logout()" data-role="button" id="btnlogout" data-icon="carat-d" data-iconpos="right">logout</a>
+    </div>    
+    <div data-role="content">  
+      <form action="#" method="post" name="form">
+       <fieldset class="report_fs">
+         <a href="#generateadminbtypeReport" onclick ="" class="reportBut" data-role="button" data-iconpos="right" data-icon="bars">Business Type</a>
+         <a href="#generateadmincompanyReport" onclick="" class="reportBut" data-role="button" data-iconpos="right"  data-icon="bars">Company</a>
+         </fieldset>
+      </form>
+    </div>
+  </div>
+
+<!-- Generate Business Type Report -->
+<div data-role="page" id="generateadminbtypeReport" action="" method=""  >
+    <div data-role="header" class="header">    
+<a href="#adminMenu"  class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a>
+     <h1>Generate Business Type Report</h1>
+      <a onclick="logout()" data-role="button"  id="btnlogout" data-icon="carat-d" data-iconpos="right">logout</a>   	
+      
+    </div>
+   <div data-role="content">  
+      <form action="" method="post" name="formbt" id="formbt">
+      <div>
+         <div data-role="fieldcontain"> 
+           <label for="year" align="right"> From Year<span id="star">*</span> :  </label>
+           <select id="fromyear" name="fromyear" required>
+              <option value=""> Please select </option>
+			  <option value=""> 2016 </option>
+			  <option value=""> 2017 </option>	
+			  <option value=""> 2018 </option>	
+			  <option value=""> 2019 </option>	
+			  <option value=""> 2020 </option>
+           </select><br/><br/><br/>
+           <label for="year" align="right"> To Year<span id="star">*</span> :  </label>
+           <select id="toyear" name="toyear" required>
+              <option value=""> Please select </option>
+			  <option value=""> 2016 </option>
+			  <option value=""> 2017 </option>	
+			  <option value=""> 2018 </option>
+			  <option value=""> 2019 </option>
+			  <option value=""> 2020 </option>
+           </select><br/><br/><br/>   
+           <label for="btypereport" align="right"> Business Type: </label>        
+           <select id="btypereport" name="btypereport">
+              <option >Please select</option>
+           </select><br/><br/><br/>
+           
+         </div>    
+         <div class="save-cancel-button">
+           <a data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="check"  onclick="checkbusiness()" name="submit" type="submit" >Generate Report</a>
+           <a data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="check"  onclick="downloadreport()" name="submit" type="submit" >Download Report</a>
+          
+		  <a href = "#Report" data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="delete" >Cancel</a>
+         </div>
+       </div>
+      </form>
+   </div>
+  </div>
+  </div>
+  
+  
+<!--View Business report --->
+
+
+ <div data-role="page" id="BusinessReport" >
+
+    <div data-role="header" class="header">
+     
+      <h1>Businesses Report</h1>
+   
+    </div>
+  <a href="#" id="business" ></a>
+  <div id="content">     
+    <form>
+      <fieldset class="report-fs">
+        <p id="thebusinesses" >
+        </p>
+      </fieldset>
+	 <center> <a href = "#generateadminbtypeReport" data-role="button" class="" data-iconpos="right" data-inline="true" data-icon="delete" >Cancel</a></center>
+         
+    </form>
+  </div>
+</div>
+</div>
+
+<!--View KPI--->
+ <div data-role="page" id="kpilistV" >
+
+       <div data-role="header" class="header">    
+<a href="#adminMenu"  class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a>
+     <h1>KPI Select</h1>
+      <a onclick="logout()" data-role="button"  id="btnlogout" data-icon="carat-d" data-iconpos="right">logout</a>   	
+      
+    </div>
+  <a href="#" id="kpivalue" ></a>
+  <div id="content">     
+    <form>
+      <fieldset class="report-fs">
+        <p id="kpilistview" >
+        </p>
+      </fieldset>
+	 <center> <a data-role="button" class="" data-iconpos="right" data-inline="true" data-icon="delete" onclick="getSelectedChx()" >Submit</a>
+        <a href="#Attribute" data-role="button" class="" data-iconpos="right" data-inline="true" data-icon="delete"  >Cancel</a></center>
+        
+    </form>
+  </div>
+</div>
+</div>
+
+<!-- Generate Admin Company Report -->
+<div data-role="page" id="generateadmincompanyReport" action="" method=""  >
+
+    <div data-role="header" class="header">
+    
+      <h1>Generate Company Report</h1>
+   
+    </div>
+  
+   <div data-role="content1">  
+      <form action="" method="post" name="formi" id="formi">
+         <div data-role="fieldcontain"> 
+     
+        <label for="year" align="right"> From Year<span id="star">*</span> :  </label>
+          <select id="fromyeari" name="fromyeari" required>
+      <option value=""> Please select </option>
+			  <option value=""> 2016 </option>
+			  <option value=""> 2017 </option>	
+			  <option value=""> 2018 </option>	
+			  <option value=""> 2019 </option>	
+			  <option value=""> 2020 </option>
+          </select><br/><br/><br/>
+        <label for="year" align="right"> To Year<span id="star">*</span> :  </label>
+          <select id="toyeari" name="toyeari" required>
+          <option value=""> Please select </option>
+			  <option value=""> 2016 </option>
+			  <option value=""> 2017 </option>	
+			  <option value=""> 2018 </option>	
+			  <option value=""> 2019 </option>	
+			  <option value=""> 2020 </option>
+          </select><br/><br/><br/>    
+        <label for="txtcompanyuserreport" align="right"> Company(Optional) : </label>        
+           <select id="txtcompanyuserreport" name="txtcompanyuserreport">
+            <option >Please select</option>
+           </select><br/><br/><br/>
+   
+        </div>       
+       <div class="save-cancel-button">
+          <a data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="check"  onclick="checkcompany()" name="submit" type="submit" >Generate Report</a>
+           <a data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="check"  onclick="downloadcompreport()" name="submit" type="submit" >Download Report</a>
+          
+		  <a href = "#Report" data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="delete" >Cancel</a>
+         
+		 </div>
+      </form>
+
+   </div>
+  </div>
+   
+
+   
+
+   
+<!--View Company report --->
+
+
+ <div data-role="page" id="CompanyReport" >
+
+    <div data-role="header" class="header">
+     
+      <h1>Company Report</h1>
+   
+    </div>
+  <a href="#" id="companyrpt" ></a>
+  <div id="content">     
+    <form>
+      <fieldset class="report-fs">
+        <p id="thecompanies" >
+        </p>
+      </fieldset>
+	 <center> <a href = "#generateadmincompanyReport" data-role="button" class="" data-iconpos="right" data-inline="true" data-icon="delete" >Cancel</a></center>
+         
+    </form>
+  </div>
+</div>
+</div>
+
+  
+</body>
+</html>
+
+

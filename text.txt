@@ -1,0 +1,4 @@
+supply our own dict 
+read off the database 
+auto correct
+Database

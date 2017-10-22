@@ -1,0 +1,18 @@
+login  login.php   login.js
+
+file:///C:/Users/janic/Desktop/SobeyPro/downtownhalifax/app/cpi.html#userHomePage
+file:///C:/Users/janic/Desktop/SobeyPro/downtownhalifax/app/cpi.html#adminHome  - admi menu
+file:///C:/Users/janic/Desktop/SobeyPro/downtownhalifax/app/cpi.html#DataEntryPage
+file:///C:/Users/janic/Desktop/SobeyPro/downtownhalifax/app/cpi.html#DataEditPage
+file:///C:/Users/janic/Desktop/SobeyPro/downtownhalifax/app/cpi.html#Attribute
+
+file:///C:/Users/janic/Desktop/SobeyPro/downtownhalifax/app/cpi.html#DataEntryMenu   - user menu
+
+file:///C:/Users/janic/Desktop/SobeyPro/downtownhalifax/app/cpi.html#DataEntryPage
+
+file:///C:/Users/janic/Desktop/SobeyPro/downtownhalifax/app/cpi.html#DataEditPage
+
+
+forget password checkEmail.js     checkEmail.php
+
+New password validate.js

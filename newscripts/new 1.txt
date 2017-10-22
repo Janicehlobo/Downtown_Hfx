@@ -1,0 +1,18 @@
+1. Add KPI should do both adding in KPITable and alter the user details table
+2. Choose KPI will display the KPI's and once the values are checked, the CheckedKPI table should be truncated and the table inputs the checked values
+3. there must be a function which executes 2 PHP files
+    i. first php file will select all the values from the CheckedKPI table and store it as a object.
+	ii. this values are parsed to the second php file which stores the data.
+	
+	else if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))  
+  {  
+    alert("true");
+  }
+  
+  !isNaN
+  if(!isNaN(a))
+{
+alert("Please Enter Only Characters");
+document.form.name.select();
+return false;
+}

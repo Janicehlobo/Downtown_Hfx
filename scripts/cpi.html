@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+
+<head>
+  <!--Adjusting the page on mobile screen  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta charset="utf-8" >
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css"/>
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <link rel="stylesheet" type="text/css" href="css/d.css">
+  <link rel="stylesheet" type="text/css" href="css/d-mobile.css">
+  <link rel="stylesheet" type="text/css" href="themes/test.css">
+
+  <!-- JS - jQuery/jQuery Mobile -->
+  <script src="scripts/jquery-1.12.4.min.js"></script>
+  <!--PROD import prejquerymobile-->
+  <!--DEV import prejquerymobile-->
+ <!--<script src="scripts/handleNewPassword.js"></script>-->
+ 
+  <script src="scripts/chromeFileProtocolFix.js"></script>
+  <!--ENDDEV import prejquerymobile-->
+
+  <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
+  <script src="scripts/jspdf.min.js"></script>
+  <script src="scripts/jspdf.plugin.autotable.js"></script>
+  <!--PROD import cpi-->
+  <!--DEV import cpi-->
+  
+   <script src="newscripts/jlogin.js"></script>
+    <script src="newscripts/report.js"></script>
+   <script src="newscripts/addType.js"></script>
+  <!--ENDDEV import cpi-->
+  
+  <script>
+    $(document).ready(function() {
+      $("#userMenu").panel().enhanceWithin();
+      $("#adminMenu").panel().enhanceWithin();
+    });
+  </script>
+  <script>
+    $(document).ready(function(){
+    $('#btnEnter').keypress(function(e){
+      if(e.keyCode==13)
+      $('#btnEnter').click();
+    });
+   });
+  </script>
+ 
+  </head>
+
+<body>
+  <!-- Start of first page Janice   login.js login.php-->
+  <div data-role="page" id="login">
+
+    <div data-role="header" class="header">
+  
+      <h1><img src="css/images/HF.png" width="200" height="100"> </h1>
+    </div>
+  
+    
+  
+      <form id="frmLogin" >
+      <div data-role="fieldcontain">
+
+     <fieldset  class="fs-login">
+     
+      <input type="email" id="email" name="email"  placeholder="Email" autofocus required></input><br>
+      <input type="password" id="password"  name="password"  placeholder="Password" required ></input><br>
+      <a href="" data-role="button" class="button" onclick="loginInput()" id="btnEnter" type="submit">Login</a> <br>
+   <!--  <a data-role="button" class="button" data-inline="true" onclick="loginInput()" id="btnEnter" data-icon="check" data-iconpos="right" class="button" name="submit" type="submit" >Login</a>-->
+     <!--  <input type="button" id="btn" onclick="loginInput()">-->
+	   <a href="#resetpassword" id="resetpassword" data-inline="true"  data-role="none" data-mini="false"> Reset Password</a>
+	   <a href="#getpassword" id="getpassword" data-inline="true"  data-role="none" data-mini="false"> Forgot Password</a>
+       <a href="#newuser" id="newuser" data-inline="true" data-role="none" data-mini="false" >Create New Account </a><br>
+    
+     </fieldset>
+      </div>  
+      
+      </form>
+  </div>
+  <!-- End of first page -->
+
+
+  
+
+
+  <!--forget password page -->
+  <div data-role="page" id="getpassword" data-close-btn="none">
+    <div data-role="header" class="header" >
+      <h1>Get password</h1>
+    </div>
+    <div data-role="content">
+      <form >
+      <div id="changepassEmail">
+      Please enter your email :
+      <input type="email" id="forgotEmail"  autofocus required></input><br>
+      </div>
+      <div class="save-cancel-button">
+        <a  onclick= "forgotPassword();" data-role="button" data-inline="true"   class="button" type="submit" id="submitemail" data-icon="check" data-iconpos="right">Send link to retrieve password</a>
+        <a href="#login" data-role="button" data-inline="true" data-inline="true" class="button" data-icon="delete" data-iconpos="right">Cancel</a>
+      </div>
+      </form>
+    </div>
+  </div>
+
+  <!--Reset password page -->
+  <div data-role="page" id="resetpassword" data-close-btn="none">
+    <div data-role="header" class="header">
+      <h1>Set new password</h1>
+    </div>
+    <div data-role="content">     
+      <br>
+      <form id="frmNewPassword">  
+	  <div data-role="fieldcontain">
+          <label for="existingEmail" align="right"> Email<span id="star">*</span> :  </label>
+          <input type="text" placeholder="Email" name="exisitngEmail"   data-mini="false" id="existingEmail"  >
+        </div>
+		<div data-role="fieldcontain">
+          <label for="currPassword" align="right"> Current password<span id="star">*</span> :  </label>
+          <input type="password" placeholder="Current password" name="currPassword"   data-mini="false" id="currPassword"  >
+        </div>
+
+      <div data-role="fieldcontain">
+          <label for="newPassword" align="right"> New password<span id="star">*</span> :  </label>
+          <input type="password" placeholder="New password" name="NewPassword"   data-mini="false" id="NewPassword"  >
+        </div>
+        
+        <a  data-role="button"  data-iconpos="right" class="button" data-inline="true" id="submitPassword" data-icon="check" onclick="resetPassword()">Submit</a>      
+        <a href="#login" data-role="button" data-inline="true" data-inline="true" class="button" data-icon="delete" data-iconpos="right">Cancel</a>
+      
+		</form>
+    </div>
+  </div>
+
+
+  <!--New user page -->
+  <div data-role="page" id="newuser" data-close-btn="none">
+    <div data-role="header" class="header">
+      <h1>New user</h1>
+    </div>
+    <div data-role="content">
+      <br>
+      <form id="nUser" action="#" method="post" >
+        <div data-role="fieldcontain">        
+          <label for="txtRegisterfname" align="right"> First Name<span id="star">*</span>: </label>
+          <input type="text" placeholder="First Name"  data-mini="false" id="txtRegisterfname" autofocus required>
+        </div>
+         <div data-role="fieldcontain">        
+          <label for="txtRegisterlname" align="right"> Last Name<span id="star">*</span> : </label>
+          <input type="text" placeholder="Last Name"  data-mini="false" id="txtRegisterlname"  required>
+        </div>
+      <div data-role="fieldcontain">        
+          <label for="txtRegisterEmail" align="right"> Email<span id="star">*</span> : </label>
+          <input type="email" placeholder="Email" name="txtRegisterEmail"
+          data-mini="false" id="txtRegisterEmail"   required>
+        </div>
+        <div data-role="fieldcontain">        
+          <label for="txtRegisterlphone" align="right"> Phone Number<span id="star">*</span> : </label>
+          <input type="text" placeholder="Phone Number"  data-mini="false" id="txtRegisterlphone"  required>
+        </div>
+		<div data-role="fieldcontain">        
+          <label for="txtCompanyname" align="right"> Company name<span id="star">*</span> : </label>
+          <input type="text" placeholder="Company Name"  data-mini="false" id="txtCompanyname"  required>
+        </div>
+		<div data-role="fieldcontain">     
+          <label for="txtBusinesstype" align="right"> Business Type<span id="star">*</span> : </label>
+
+		  <select id="businesstype"  name="businesstype"  required>
+		  
+        <option>Please select</option>  
+             
+           </select> 
+        </div>
+        <div data-role="fieldcontain">
+          <label for="txtRegisterPassword" align="right"> Password<span id="star">*</span> :  </label>
+          <input type="password" placeholder="Password should have 5 to 10 characters" name="txtRegisterPassword"
+          data-mini="false" id="txtRegisterPassword" required>
+        </div>
+        <div data-role="fieldcontain">
+          <label for="cfmPassword" align="right"> Confirm password<span id="star">*</span> : </label>
+          <input type="password" placeholder="Confirm Password" name="txtConfirmPassword" data-mini="false" id="txtConfirmPassword" required>
+        </div>
+         <div class="save-cancel-button">
+         <a data-role="button" class="button" data-inline="true" onclick="checkUserForm()" id="btnEnter" data-icon="check" data-iconpos="right" class="button" name="submit" type="submit" >Register</a>
+         <a href="#login" data-role="button" data-inline="true" data-inline="true" class="button" data-icon="delete" data-iconpos="right">Cancel</a><br><br>
+         <label id="note">Please note that all fields with "<span id="star">*</span>" are mandatory. </label>
+         </div>
+        </form>
+    </div>
+  </div>
+
+<!-- User Menu -->
+<div data-role="panel" data-theme="a" style="width=17em;" id="userMenu" data-display="overlay" name="menu" data-position="left" >   
+     <ul><h2>User Menu</h2> 
+         <li><a href="#userHomePage">Home</a></li>
+         <li><a href="#DataEntryMenu">Membership Data Entry</a></li>
+         <li><a href="#TermsConditions">Terms and Conditions</a></li>
+         <li><a href="#Profile">Profile</a></li> 
+                 
+     </ul>    
+</div>
+
+
+  <!--User(participant) Home Page -->
+
+  <div data-role="page" id="userHomePage" >
+    <div data-role="header" class="header">
+      <a href="#userMenu" class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a>  
+      <h1>User Home page</h1>    
+      <a onclick="logout()" data-role="button" id="btnlogout" data-icon="carat-d" data-iconpos="right">log out</a>
+      </div> <br/>
+    <form  method="post" id="frmuserHome" action="ShowComment.php"> 
+         <fieldset id="commentLable">
+             <legend class="leg" >Administrator Comment</legend>
+              <div id="comments">
+              </div> 
+            </fieldset>     
+           <fieldset id="userhometermcondition">
+            <legend class="leg">Terms and Conditions</legend>
+            Thank you for participating in the Performance Reporting project. By continuing to participate in this project you agree to the following Term and Conditions:<br>
+            - Your participation in the Performance Reporting project will be kept confidential.<br>
+            - All data will be held in a secure environment and used in aggregate form only. Individual responses will not be duplicated or shared. Each organization will have access to their detailed responses as well as aggregate outcomes.
+           </fieldset>
+           <fieldset id="userhp"> 
+             <legend><b>How To Use Application</b> </legend>
+              <div data-role="main" class="ui-content">
+              <div data-role="collapsible">
+                <h4> Initial Set-up</h4>
+                 <p> 
+                  Each user should be assigned to a co-operative to use the application. You can use the “Profile” page to check whether your co-operative has been registered in the application or not.<br><br>
+                  <b>Profile:</b>  <br>
+                  <b>a.  Add Co-operative: </b>Menu -> Profile -> Add Your Coop<br>
+                   To add your co-operative, use “Add Your Coop” on the “Profile Page”. A pop-up reminds you before adding your co-operative to the application to check registered co-operatives to avoid duplicate registration.<br>
+                  <b>b.  Assign user to Co-operative:</b><br>
+                  If you add a co-operative to the application, you will automatically be assigned to it. Otherwise, ask the application administrator to assign you to a co-operative.<br>
+                  <b>c.  Edit user information / co-operative information:</b><br>
+                  Use the edit icon in the “Action” column to edit information. The application will open an edit page, you can then make changes and use the “Save changes” button to save and go back to the profile page. Use the “Cancel” button to discard changes and go back to the profile page.
+                 </p>
+              </div>
+            <div data-role="collapsible">
+             <h4> Everyday use</h4>
+              <p><b>CPI Data Entry:</b><br>
+                <b>a.  Enter Data:</b> Menu -> CPI Data Entry -> Enter Data<br>
+                To enter data, first choose “Co-operative Name” (the dropdown list shows the name of the co-operative that you are assigned to, however if it is empty it means that you are not assigned to any co-operative, therefore you should ask an administrator to assign you to a co-operative), then select “Year”, “Fiscal Year”, “Asset Size”, and “Revenue Size” and enter data for each KPI. Use the “Save” button to save data or the “Cancel” button to discard changes and go back to previous page.<br>
+                <b>b.  Edit Data:</b> Menu -> CPI Data Entry -> Edit Data<br>
+                To edit data, first choose “Co-operative Name” (the dropdown list show the name of the co-operative that you are assigned to, however if it is empty it means that you are not assigned to any co-operative, therefore you should ask an administrator to assign you to a co-operative), then select “Year” (the dropdown list contains related years for the co-operative), “Asset Size” and “Revenue Size” which have been previously entered will be shown in their fields and “Fiscal year” will be shown in an additional pop-up window. Choose “Fiscal Year” and enter data for all the KPIs; if you leave any of them empty, zero will be inserted into the database for those fields. Use the “Save changes” button to save data or the “Cancel” button to discard changes and go back to previous page.<br><br>
+                <b>KPI Definition:</b><br>
+                This option can be used to view the full definition of each KPI.<br><br>
+               <b>Terms and Conditions:</b><br>
+               This option can be used to view terms and conditions to use the application.<br><br>
+               <b>Report:</b><br>
+               This option can be used to generate reports based on “Co-operative”, “Industry”, “Province”, and “Country”. You also have options to download the report as PDF or CSV files, or send the PDF format to your registered email. In each step you can use the “Cancel” button to go back to the main report page.
+               Please note that you can generate reports based on “Industry” and “Province” for the industry and the province related to your co-operative if there are more than two registered co-operatives in the same field.
+              </p>
+        </div>
+       </div> 
+       </fieldset> 
+       
+      </form> 
+    </div>    
+  
+  
+  <!--Add type Menu-->
+<div  data-role="panel" data-theme="a" id="addtypeMenu" data-display="overlay" name="menu" data-position="left" > 
+     <ul> <h2>Add Type</h2> 
+         <li><a href="#">Add KPI</a></li>
+        <!-- <li><a href="#Cooperatives">Cooperatives</a></li> --> 
+         <li><a href="#">Select KPI</a></li>
+        
+     </ul>  
+</div>
+<!-- Admin Menu -->
+
+<div  data-role="panel" data-theme="a" id="adminMenu" data-display="overlay" name="menu" data-position="left" > 
+     <ul> <h2>Admin Menu</h2> 
+         <li><a href="#adminHome">Home</a></li>
+        <!-- <li><a href="#Cooperatives">Cooperatives</a></li> --> 
+         <li><a href="#Users">User</a></li>
+        <!-- <li><a href="#KPIs">KPI</a></li>      -->    
+        <!-- <li><a href="#adminComment">Comment</a></li> -->
+         <li><a href="#Attribute">Add Attributes</a></li>
+         <li><a href="#AdminDataEntryMenu">Membership Data Entry</a></li>
+         <li><a href="#Report">Report</a></li>
+     </ul>  
+</div>
+
+
+
+
+<!--Admin-users Page to see users and change roles-->
+
+<div data-role="page" id="Users" action="" method=""  >
+
+    <div data-role="header" class="header">
+     
+       <a href="#adminMenu"  class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a>
+      <h1>Users Page</h1>
+      <a onclick="logout()" data-role="button"  id="btnlogout" data-icon="carat-d" data-iconpos="right">log out</a>     
+    </div>    
+
+    <div data-role="content">
+
+      <form id="frmUsersPage" action="" method="POST">  
+<div>
+  <p id="theUsers" >
+  </p> 
+</div>
+</form>
+
+</div>
+</div>
+
+<!--Admin - Edit Users Page -->
+
+<div data-role="page" id="editUser" >
+
+    <div data-role="header" class="header">
+  
+      <h1>Edit User Info</h1>
+    </div>    
+   
+ <form id="frmEditUsers" action="" method="">
+
+
+       <div data-role="fieldcontain">        
+          <input type="hidden"    id="txtIDUser"  >
+        </div>
+       
+       <div data-role="fieldcontain">        
+          <label for="txtfnameUser" align="right"> First Name : </label>
+          <input type="text"  data-mini="false" id="txtfnameUser"   autofocus >
+        </div>
+
+        <div data-role="fieldcontain">        
+          <label for="txtlnameUser" align="right"> Last Name : </label>
+          <input type="text"  data-mini="false" id="txtlnameUser"  >
+        </div>
+
+       <div data-role="fieldcontain">        
+          <label for="txtEmailUser" align="right"> Email : </label>
+          <input type="email"  data-mini="false" id="txtEmailUser"  onchange="ValidateEmail('txtEmailUser')"  >
+        </div>
+
+        <div data-role="fieldcontain">        
+          <label for="txtphoneUser" align="right"> Phone Number: </label>
+          <input type="number"  data-mini="false" id="txtlphoneUser"  >
+        </div>
+
+
+        <div data-role="fieldcontain">
+          <label for="txtroleuser" align="right"> Comapny Name :  </label>
+           <select id="txtroleuser" name="txtroleuser" required>
+               <option >Please select</option>
+               <option value="admin">Admin</option>
+               <option value="user">User</option>              
+            </select>
+        </div>
+
+        <div data-role="fieldcontain">
+           <label for="txtst" align="right"> Role :  </label>
+              <select id="txtsatauUser" name="txtsatauUser" required>
+               <option >Please select</option>
+               <option value="active">Active</option>
+               <option value="inactive">Inactive</option>              
+            </select>
+        </div>
+
+		
+		<!--EditUsers.php-->
+        <div data-role="fieldcontain">
+          <label for="txtcoop" align="right"> Business Type </label>
+          <select  id="btype" name="btype"  required ><br/>
+            <option>Please select</option>          
+          </select>
+        </div> 
+              
+      <div class="save-cancel-button">
+    <a data-role="button" data-inline="true" class="button" onclick="EditUserInfo()" id="btnEnter" data-icon="check" data-iconpos="right" type="submit">Save changes</a>
+    <a href="#Users" data-role="button" data-inline="true" class="button" data-icon="delete" data-iconpos="right">Cancel</a> </div>    
+
+
+</form>
+
+</div>
+</div>
+
+
+
+
+
+<!--User - Profile Page -->
+
+<div data-role="page" id="Profile" >
+    <div data-role="header" class="header">
+      <a href="#userMenu"  class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a>
+      <h1>Profile Page</h1>
+      <a onclick="logout()" data-role="button"  id="btnlogout" data-icon="carat-d" data-iconpos="right">log out</a>  
+    </div>
+    <div data-role="content">
+      <div data-role="fieldcontain" class="center">
+          <label for="txtCoopName" align="right"> Coop List : </label>
+          <select id="txtCoopsName" name="txtCooperativeName"  required >
+               <option >Please Check</option>
+          </select>
+        </div> 
+        <div id="enter-edit-data">
+        <a data-role="button" class="button"  href="#AddCoop" onclick="return confirm('If you checked cooperative list click ok and countinue.\n If not please cancel and check the list first ')" 
+        id="btnEnter" type="submit">Add Your Coop</a>
+        </div>
+      <fieldset id="frmprofile"> 
+               <p id="theprofile">
+               </p>
+
+              <p id="theprofileuser">
+               </p>
+      </fieldset>
+    </div>      
+</div>
+
+<!--User- edit profile -->
+
+<div data-role="page" id="editprofile" >
+
+    <div data-role="header" class="header">
+  
+   
+      
+      <h1>Edit Profile page</h1>
+    </div>    
+   
+ <form id="frmEditprofile" action="" method="">
+
+
+        <div data-role="fieldcontain">        
+          <input type="hidden"    id="txtEditproid"  >
+        </div>
+
+       <div data-role="fieldcontain">
+          <label for="txtEditCoopName" align="right"> Coop Name : </label>
+          <input type="text" name="txtEditproName" data-mini="false" id="txtEditproName"  >
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="txtEditindustry" align="right"> Industry : </label>        
+          <select id="txtEditindustrypro" name="txtEditindustrypro"   required>              
+         <option >Please select</option>
+          </select>
+        </div>  
+
+        <div data-role="fieldcontain">
+          <label for="txtEdittypepro" align="right"> Type : </label>
+          <select id="txtEdittypepro" name="txtEdittypepro" required>
+               <option >Please select</option>              
+          </select>
+        </div>
+         
+        <div data-role="fieldcontain">
+          <label for="txtEditpostalcode" align="right">Postal code : </label>
+          <input type="text"  name="txtEditpostalcodepro"
+          data-mini="false" id="txtEditpostalcodepro" placeholder="x3x 3x3" onChange="checkPostalCode(txtEditpostalcodepro, txtEditprovincepro , txtEditcountrypro );" >
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="txtEditprovince" align="right"> Province : </label>
+          <input type="text" name="txtEditprovincepro" data-mini="false" id="txtEditprovincepro" readonly  >
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="txtEditcountry" align="right"> Country :  </label>
+          <input type="text"  name="txtEditcountrypro" data-mini="false" id="txtEditcountrypro" readonly   >
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="txtEditlanguagepro" align="right"> Language :  </label>
+          <select id="txtEditlanguagepro" name="txtEditlanguagepr" required>
+               <option >Please select</option>
+               <option value="English"> English </option>
+               <option value="French"> French </option>
+          </select>
+        </div>        
+     
+    <div class="save-cancel-button">  
+    <a data-role="button" class="button" data-inline="true" onclick="EditproInfo()" id="btnEditprofile" type="submit">Save changes</a>
+    <a href="#Profile" data-role="button" data-inline="true" class="button" data-icon="delete" data-iconpos="right">Cancel</a>
+  </div>
+
+</form>
+</div>
+
+<!--User-edit profile user-->
+
+<div data-role="page" id="editprofileuser" >
+    <div data-role="header" class="header">
+      <h1>Edit User page</h1>
+    </div>    
+ <form id="frmEdituser" action="" method="">
+        <div data-role="fieldcontain">        
+          <input type="hidden"    id="txtEditproiduser"  >
+        </div>
+       <div data-role="fieldcontain">
+          <label for="txtEditFirstname" align="right"> First Name : </label>
+          <input type="text" name="txtEditfirstname" data-mini="false" id="txtEditfirstname"  >
+        </div>
+        <div data-role="fieldcontain">
+          <label for="txtEditlastname" align="right"> Last Name : </label>
+          <input type="text" name="txtEditlastname" data-mini="false" id="txtEditlastname"  >
+        </div>
+        <div data-role="fieldcontain">
+          <label for="txtEditemail" align="right"> Email : </label>
+          <input type="text" name="txtEditemail" data-mini="false" id="txtEditemail" onchange="ValidateEmail('txtEditemail')"  >
+        </div>
+        <div data-role="fieldcontain">
+          <label for="txtEditphone" align="right"> Phone Number : </label>
+          <input type="text" name="txtEditphone" data-mini="false" id="txtEditphone"  >
+        </div>
+        <div class="save-cancel-button">  
+          <a data-role="button" class="button" data-inline="true" onclick="EdituserInfo()" id="btnEdituserProfile" type="submit">Save changes</a>
+          <a href="#Profile" data-role="button" data-inline="true" class="button" data-icon="delete" data-iconpos="right">Cancel</a>
+       </div>
+ </form>
+</div>
+
+<!--Admin - Data Entry menu -->
+
+<div data-role="page" id="AdminDataEntryMenu" >
+     <div data-role="header" class="header">
+      <a href="#adminMenu" class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a> 
+      <h1>Membership Data Entry</h1>
+      <a onclick="logout()" data-role="button"  id="btnlogout" data-icon="carat-d" data-iconpos="right">log out</a>
+     </div> 
+     <form id="frmDataEntryMenu"> 
+       <div id="data_div">
+	   <a href="#DataEntryPage" onclick="getYear();getCompany();" class="dataBut"  data-role="button" class="button" data-iconpos="right"  data-icon="plus">Enter Data</a> 
+      
+        <!--<a onclick="showKPI();"  class="dataBut" data-role="button" class="button" data-iconpos="right"  data-icon="plus">Enter Data</a>-->
+        <a onclick="showKPIEdit();" class="dataBut"   data-role="button" class="button" data-iconpos="right"  data-icon="edit">Edit Data</a> 
+       </div>
+     </form>
+</div> 
+
+<!--User - Data Entry menu -->
+
+<div data-role="page" id="DataEntryMenu" >
+    <div data-role="header" class="header">
+      <a href="#userMenu" class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a> 
+      <h1>Membership Data Entry Menu</h1>
+      <a onclick="logout()" data-role="button"  id="btnlogout" data-icon="carat-d" data-iconpos="right">log out</a>
+     </div> 
+     <form id="frmDataEntryMenu" action="" method="post">
+      <div id="data_div">
+      <a href="#DataEntryPage" onclick="getYear();getCompany();" class="dataBut"  data-role="button" class="button" data-iconpos="right"  data-icon="plus">Enter Data</a> 
+      <a onclick="showKPIEdit();" class="dataBut"   data-role="button" class="button" data-iconpos="right"  data-icon="edit">Edit Data</a>
+       </div> 
+     </form>
+    </div>  
+
+
+ <!--User/admin - Data Entry Page -->
+
+  <div data-role="page" id="DataEntryPage" >
+    <div data-role="header" class="header">
+      <h1>Membership Data Entry page</h1>   
+    </div>  
+    <form id="frmDataEntryPage" action="" method="post"> 
+         <div data-role="fieldcontain">
+		    <label for="Company name" align="right"> Company Name<span id="star">*</span> :  </label>
+      <input type="text" id="userCompany" name="userCompany"  autofocus required></input><br>
+	  </div>
+		<div data-role="fieldcontain">
+		    <label for="Year" align="right"> Year<span id="star">*</span> :  </label>
+      <input type="text" id="dataYear" name="dataYear"  autofocus required></input><br>
+	  </div>
+        
+		   <div data-role="fieldcontain">
+           <label for="month" align="right"> Month range<span id="star">*</span> :  </label> 
+           <select id="getMonthRange" name="getMonthRange"  required> 
+             <option> Please select </option>
+           </select> 
+		   </div>
+		   <div data-role="fieldcontain">
+		    <label for="Current Employees" align="right"> Employees<span id="star">*</span> :  </label>
+      <input type="text" id="emp" name="emp"  placeholder="Number of employees" autofocus required></input><br>
+	  </div>
+	  <div data-role="fieldcontain">
+	  <label for="Total Sales" align="right"> Sales<span id="star">*</span> :  </label>
+      <input type="text" id="sales"  name="sales" placeholder="Total Sales" required ></input><br>
+      </div>
+	  <div data-role="fieldcontain">
+           <label for="assetsize" align="right"> Office Space<span id="star">*</span>:  </label>
+           <input type="text" id="size"  name="size" placeholder="Office Space" required ></input><br>
+		   </div>
+		   <div data-role="fieldcontain">
+           <label for="tax" align="right"> Tax paid<span id="star">*</span>:   </label>
+           <input type="text" id="tax"  name="tax" placeholder="Tax paid" required ></input><br>
+        </div><br/><br/>
+        <div  id="kpilist">  
+        </div> 
+        <div class="save-cancel-button">
+          <a  data-role="button" class="button" data-inline="true" type="submit" id="btnsave" onclick="addBusinessDetails();showKPI();" data-icon="check" data-iconpos="right">Save</a>
+          <a  data-role="button" class="button" data-inline="true" type="submit" id="btncancel" onclick="cancelBackDataEntry('frmDataEntryPage')" data-icon="delete" data-iconpos="right">Cancel</a> 
+          <a  data-role="button" class="button" data-inline="true" type="submit" id="btnedit" onclick="cancelBackDataEntry('frmDataEntryPage')" data-icon="check" data-iconpos="right">Edit</a> 
+       
+		</div>   
+    </form>  
+  </div>  
+
+ 
+
+
+  
+  
+ <!--User/admin - Data Edit Page -->
+
+  <div data-role="page" id="DataEditPage" >
+
+   
+    <div data-role="header" class="header">
+  <!-- 
+       <a onclick="cancelBackEditData('frmDataEditPage')"  data-role="button"  data-iconpos="right"   data-icon="arrow-l">Back</a> --> 
+      <h1>Membership Data Edit page</h1>
+    </div>  
+
+    <form id="frmDataEditPage" action="" method="post"> 
+
+         <div data-role="fieldcontain">
+           <label for="txtcoop" align="right"> Company Name<span id="star">*</span> : </label>
+           <select  id="datacoopname"  ><br/>
+            <option selected>Please select</option>          
+           </select>
+        </div> 
+		
+		   
+    
+	 
+        <div data-role="fieldcontain"> 
+           <label for="year" align="right"> Year<span id="star">*</span> :  </label>
+           <select id="year" name="year"  required>
+             <option> Please select </option>
+           </select> 
+		   </div>
+		   <div data-role="fieldcontain">
+           <label for="month" align="right"> Month range<span id="star">*</span> :  </label> 
+           <select id="month" name="month"  required> 
+             <option> Please select </option>
+           </select> 
+		   </div>
+		   <div data-role="fieldcontain">
+		    <label for="Current Employees" align="right"> Employees<span id="star">*</span> :  </label>
+      <input type="text" id="emp" name="emp"  placeholder="Number of employees" autofocus required></input><br>
+	  </div>
+	  <div data-role="fieldcontain">
+	  <label for="Total Sales" align="right"> Sales<span id="star">*</span> :  </label>
+      <input type="text" id="sales"  name="sales" placeholder="Total Sales" required ></input><br>
+      </div>
+	  <div data-role="fieldcontain">
+           <label for="assetsize" align="right"> Office Space<span id="star">*</span>:  </label>
+           <input type="text" id="size"  name="size" placeholder="Office Space" required ></input><br>
+		   </div>
+		   <div data-role="fieldcontain">
+           <label for="tax" align="right"> Tax paid<span id="star">*</span>:   </label>
+           <input type="text" id="tax"  name="tax" placeholder="Tax paid" required ></input><br>
+        </div>
+         
+        
+       <div  id="kpilistEdit">               
+        </div> 
+
+
+        <div class="save-cancel-button">
+        <a data-role="button" class="button" type="submit" data-inline="true" id="btnedit" data-icon="check" data-iconpos="right" onclick="editKPIData();">Save changes</a>
+         <a  data-role="button" class="button" type="submit" data-inline="true" id="btncancelEdit" onclick="cancelBackEditData('frmDataEditPage')" data-icon="delete" data-iconpos="right">Cancel</a>
+       </div>
+
+       </form>  
+    </div>   
+
+  
+ 
+  <!--User - Terms & condition Page -->
+  
+  <div data-role="page" id="TermsConditions" >
+    <div data-role="header" class="header">
+      <a href="#userMenu" class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a>
+      <h1>Terms and Conditions page</h1>
+      <a onclick="logout()" data-role="button"  id="btnlogout" data-icon="carat-d" data-iconpos="right">log out</a>
+    </div>    
+    <div data-role="content">
+      <form id="" action="">
+      <div data-role="fieldcontain">        
+      <div data-role="fieldcontain">          
+           <fieldset id="usertermcondition" >
+            <legend class="leg">Terms and Conditions</legend>
+            Thank you for participating in the Performance Reporting project. By continuing to participate in this project you agree to the following Term and Conditions:<br>
+            - Your participation in the Performance Reporting project will be kept confidential.<br>
+            - All data will be held in a secure environment and used in aggregate form only. Individual responses will not be duplicated or shared. Each organization will have access to their detailed responses as well as aggregate outcomes.<br>
+            <h2 id="borderline"></h2>
+            Your participation in the Performance Reporting project will be kept confidential.
+           All data will be held in a secure environment and used in aggregate form only. Individual responses will not be duplicated or shared. Each organization will have access to their detailed responses as well as aggregate outcomes.<br>
+           If you have any questions or concerns, please contact Daphne Rixon at Daphne.Rixon@smu.ca. 
+           </fieldset>
+        </div>     
+      </div>  
+      </form> 
+    </div>    
+  </div>
+
+   <!--Admin Add Attribute -->
+
+ <div data-role="page" id="Attribute" >
+    <div data-role="header">
+       <a href="#adminMenu" class="menu" data-role="button" data-iconpos="right"  data-icon="bars">Menu</a>
+      <h1>Add Attribute Page</h1>
+      <a onclick="logout()" data-role="button" id="btnlogout" data-icon="carat-d" data-iconpos="right">log out</a>
+    </div>     
+<form  id="attributes" >
+<div>  
+  <div data-role="popup"  id="myPopupDialogedit" data-history="false" >
+       <div data-role="header">
+       <h2>Edit Status</h2>
+       </div>
+  <form  id="editAttribute" name ="editattributeform" >
+   <div data-role="main" class="ui-content">
+       <h2>Edit status</h2>
+       <p> <input type="hidden"    id="AttributeName"  ></p>
+       <p> <input type="hidden"    id="AttributeValue"  ></p>
+       <p><select id="editVal" name="editAttributeValue" required>
+               <option >Please select</option> 
+               <option value="Active">Active</option>
+               <option value="InActive">InActive</option>
+          </select></p>
+       <a type="submit" name="Submit" class="button" data-role="button" onclick="editattributeDatabase()" >Save</a>
+       <a data-role="button"  id="btnEnter" class="button" type="submit" href="#Attribute" >Cancel</a>
+   </div>
+ </form>
+ </div> 
+      <a href="#addtypeMenu" class="menu" data-role="button" data-iconpos="right"  data-icon="bars">Add Type</a>
+      </div>
+        <div data-role="popup" id="myPopupDialogInd" data-history="false">
+       <div data-role="header">
+       <h1>Type</h1>
+       </div>
+ <form  id="type" name = "Indform" >
+   <div data-role="main" class="ui-content">
+       <h2>Add a new Type</h2>
+   <input type="text" name="kpiValue"  id="kpiVal" autofocus required></input>    
+   <a type="submit" name="Submit" class="button" onclick="showKPIView()" data-role="button" >Add</a>   
+   <a data-role="button"  id="btnEnter" class="button" type="submit" href="#Attribute">Cancel</a>
+   </div>
+</form>
+ </div>
+<div>     
+      <a href="#myPopupDialogtype" data-rel="popup"  data-position-to="window" data-transition="fade" 
+	  class="ui-btn ui-corner-all ui-shadow ui-btn-inline button menu">Add Month Range</a>    
+      </div>
+        <div data-role="popup" id="myPopupDialogtype" data-history="false">
+       <div data-role="header">
+       <h1>Month</h1>
+       </div>
+ <form id="type" name = "typeform" >
+   <div data-role="main" class="ui-content">
+       <h2>Add a Month range</h2>
+   
+   	   <label for="txtMonth" align="left"> Select month range<span id="star">*</span> :  </label>
+  <select  id="monthRange" name="monthRange"  required ><br/>
+            <option >Please select</option> 
+               <option value="Halfyearly">Halfyearly</option>
+               <option value="Quarterly">Quarterly</option>
+			
+          </select>
+   
+   <a type="submit" name="Submit" class="button" onclick="InsertMonth()" data-role="button" >Add</a>    
+   <a data-role="button"  id="btnEnter" class="button" type="submit" href="#Attribute">Cancel</a>
+   </div>
+</form>
+ </div>
+<div>  
+      <a href="#myPopupDialogcat" data-rel="popup" data-position-to="window" data-transition="fade" 
+	  class="ui-btn ui-corner-all ui-shadow ui-btn-inline button menu">Add Business type</a>
+      </div>
+        <div data-role="popup" id="myPopupDialogcat" data-history="false">
+       <div data-role="header">
+       <h1>Business Type</h1>
+       </div>
+ <form  id="categoryform" name = "catform" >
+   <div data-role="main" class="ui-content">
+       <h2>Add a new Business Type</h2>       
+<input type="text" name="AddBtype"  id="AddBtype" autofocus required></input>
+   <a type="submit" name="Submit" class="button" onclick="InsertBtype()" data-role="button" >Add</a>    
+   <a data-role="button"  id="btnEnter" class="button" type="submit" href="#Attribute">Cancel</a>
+   </div>
+</form>
+ </div>
+
+ 
+ 
+ 
+
+
+  
+
+ 
+ <!-- edit page Janice-->
+ 
+ <div id="Attributestable">
+   </div>
+  </form>
+  </div>
+</div>  
+
+  <!-- Admin Home page -->
+ <div data-role="page" id="adminHome" >
+    <div data-role="header" class="header">
+      <a href="#adminMenu"  class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a>
+      <h1>Admin Home page</h1>
+      <a onclick="logout()" data-role="button" id="btnlogout" data-icon="carat-d" data-iconpos="right">log out</a>
+    </div>    
+    <div data-role="content">
+<fieldset id="adminhp"> 
+      <legend><b>How To Use Application</b> </legend>
+       <div data-role="main" class="ui-content">
+         <div data-role="collapsible">
+          <h4> Initial Set-up</h4>
+           <p>To use the application, you first need to set up the basic attributes for co-ops and then define the KPIs. You can revise the attributes and KPIs based on your needs at any time. <br><br>
+           <b>Add Attributes </b><br>
+           This option can be used to add, deactivate and activate attributes.<br>
+           <b>a.  Add New Attributes:</b>  Menu -> Add Attributes<br>
+           You can use this page to add “Industry” and “Type” that will be used to define co-operatives, add “Category” that will be used to define KPIs, and add “Asset Size” and “Revenue Size” that will be use to enter data.<br>
+           <b>b. Activate/ Deactivate Attributes:</b>  Menu -> Add Attributes <br>
+           Use the edit icon in the “Action” column on the “Add Attribute Page”, a pop-up window will then open. To deactivate the selected Attributes, select “Inactive” in the first dropdown list. You can activate an Attribute by changing its status to “Active”. <br><br>
+           <b>KPI</b><br>
+           This option can be used to add, edit, deactivate and activate KPIs.<br>
+           <b>a. Add new KPI: </b>  Menu -> KPI -> Add New KPI<br>
+           Use the “Add New KPI” button on the “KPIs Page”. The application will open a new page to define a new KPI (please note that all fields are mandatory to fill), then use the “Save” button to add the KPI. You could also use the “Cancel” button to go back to the “KPIs Page” without saving a new KPI.<br>
+           <b>b. Edit KPI:</b>  Menu -> KPI <br>
+           Use the edit icon in the “Action” column on the “KPIs Page”. The application will open a new page to edit the selected KPI.<br>
+           <b>c. Activate/ Deactivate KPI:</b>  Menu -> KPI <br>
+           Use the edit icon in the “Action” column on the “KPIs Page”. The application will open a new page. To deactivate the selected KPI, select “Inactive” in the “Status” dropdown list. You can activate a KPI by changing its status to “Active”.
+         </p>
+        </div>
+         <div data-role="collapsible">
+          <h4> Everyday use</h4>
+           <p><b>Cooperatives</b><br>
+             This option can be used to add, edit, deactivate and activate co-operatives.<br><br>
+
+             <b>User</b><br>
+             This option can be used to add, edit, deactivate and activate users, as well as upgrade a user's role to "admin".<br><br>
+
+             <b>Comment</b><br>
+             This option can be used to leave a comment for users. The comment will be posted on the user’s home page.<br><br>
+
+
+             <b>CPI Data Entry</b><br>
+             This option can be used to enter or edit data.<br>
+             <b>a.  Enter Data:</b> Menu -> CPI Data Entry -> Enter Data<br>
+             To enter data, first choose “Co-operative Name” (the dropdown list contains all active registered co-operatives), then select “Year”, “Fiscal Year”, “Asset Size”, and “Revenue Size”, and enter data for each KPI. Use the “Save” button to save data or the “Cancel” button to discard changes and go back to previous page.<br>
+             <b>b.  Edit Data:</b> Menu -> CPI Data Entry -> Edit Data<br>
+             To edit data, first choose “Co-operative Name” (the dropdown list contains active registered co-operatives, which have previously entered data in the database), then select “Year” (the dropdown list contains related years for the selected co-operative). “Asset Size” and “Revenue Size” which have been previously entered will be shown in their fields and “Fiscal year” will be shown in an additional pop-up window. Choose “Fiscal Year” and enter data for all the KPIs; if you leave any of them empty, zero will be inserted into the database for those fields. Use the “Save changes” button to save data or the “Cancel” button to discard changes and go back to previous page.<br><br>
+             <b>Report</b><br>
+             This option can be used to generate reports based on “Co-operative”, “Industry”, “Province”, and “Country”. You also have options to download the report as PDF or CSV files, or send the PDF format to your registered email. In each step, you can use the “Cancel” button to go back to the main report page.
+        </p>
+        </div>
+       </div> 
+       </fieldset> 
+    </div>    
+  </div>
+  
+  
+   <!-- Admin Comment Page -->
+
+  <div data-role="page" id="adminComment" >
+    <div data-role="header" class="header">
+      <a href="#adminMenu" class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a>     
+      <h1>Admin Comment page</h1>
+      <a onclick="logout()" data-role="button"  id="btnlogout" data-icon="carat-d" data-iconpos="right">log out</a>
+    </div>    
+    <div data-role="content">
+      <form method="post" id="frmuserHomePage" > 
+        <fieldset data-role="fieldcontain" id="comment_fs">
+          <label for="admCommentForUser" id="commentnote" >Please write comment in the box: </label><br>
+          <textarea cols="100" rows="10" id="admCommentForUser"  ></textarea><br>
+           <a type="submit" onclick="InsertComment()" id="comment_but" data-role="button">Post to User Home Page</a>   
+        </fieldset> 
+      </form> 
+    </div>    
+  </div>
+
+<!-- Admin Report Page -->
+  <div data-role="page" id="Report" >
+    <div data-role="header" class="header">
+      <a href="#adminMenu" class="menu" data-role="button" data-iconpos="right"  data-icon="bars">Menu</a>     
+      <h1>Report page</h1>
+      <a onclick="logout()" data-role="button" id="btnlogout" data-icon="carat-d" data-iconpos="right">log out</a>
+    </div>    
+    <div data-role="content">  
+      <form action="#" method="post" name="form">
+       <fieldset class="report_fs">
+         <a href="#generateadminbtypeReport" onclick ="ReportBtype()" class="reportBut" data-role="button" data-iconpos="right" data-icon="bars">Business Type</a>
+         <a href="#generateadmincompanyReport" class="reportBut" data-role="button" data-iconpos="right"  data-icon="bars">Company</a>
+         <a href="#generateadminprovinceReport" class="reportBut" data-role="button" data-iconpos="right"  data-icon="bars">Office space</a>
+         <a href="#generateadmincountryReport" class="reportBut" data-role="button" data-iconpos="right"  data-icon="bars">Tax Paid</a>
+       </fieldset>
+      </form>
+    </div>
+  </div>
+<!-- User Report Page -->
+  <div data-role="page" id="ReportUser" >
+    <div data-role="header" class="header">
+      <a href="#userMenu" class="menu" data-role="button" data-iconpos="right"  data-icon="bars">Menu</a>     
+      <h1>Report page</h1>
+      <a onclick="logout()" data-role="button" id="btnlogout" data-icon="carat-d" data-iconpos="right">log out</a>
+    </div>    
+    <div data-role="content">  
+      <form action="#" method="post" name="form">
+       <fieldset class="report_fs">
+         <a href="#generateadmincoopReport" class="reportBut" data-role="button" data-iconpos="right"  data-icon="bars">Business Type</a>
+         <a href="#generateadmincompanyReport" class="reportBut" data-role="button" data-iconpos="right"  data-icon="bars">Company</a>
+         <a href="#generateadminprovinceReport" class="reportBut" data-role="button" data-iconpos="right"  data-icon="bars">Office space</a>
+         <a href="#generateadmincountryReport" class="reportBut" data-role="button" data-iconpos="right"  data-icon="bars">Tax Paid</a>
+       </fieldset>
+      </form>
+    </div>
+  </div>
+<!-- Generate Business Type Report -->
+<div data-role="page" id="generateadminbtypeReport" action="" method=""  >
+    <div data-role="header" class="header">    
+<a href="#adminMenu"  class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a>
+     <h1>Generate Business Type Report</h1>
+      <a onclick="logout()" data-role="button"  id="btnlogout" data-icon="carat-d" data-iconpos="right">log out</a>   	
+      
+    </div>
+   <div data-role="content">  
+      <form action="" method="post" name="formbt" id="formbt">
+      <div>
+         <div data-role="fieldcontain"> 
+           <label for="year" align="right"> From Year<span id="star">*</span> :  </label>
+           <select id="fromyear" name="fromyear" required>
+              <option value=""> Please select </option>
+			  <option value=""> 2016 </option>
+			  <option value=""> 2017 </option>	
+			  <option value=""> 2018 </option>	
+			  <option value=""> 2019 </option>	
+			  <option value=""> 2020 </option>
+           </select><br/><br/><br/>
+           <label for="year" align="right"> To Year<span id="star">*</span> :  </label>
+           <select id="toyear" name="toyear" required>
+              <option value=""> Please select </option>
+			  <option value=""> 2016 </option>
+			  <option value=""> 2017 </option>	
+			  <option value=""> 2018 </option>
+			  <option value=""> 2019 </option>
+			  <option value=""> 2020 </option>
+           </select><br/><br/><br/>   
+           <label for="btypereport" align="right"> Business Type: </label>        
+           <select id="btypereport" name="btypereport">
+              <option >Please select</option>
+           </select><br/><br/><br/>
+           
+         </div>    
+         <div class="save-cancel-button">
+           <a data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="check"  onclick="checkbusiness()" name="submit" type="submit" >Generate Report</a>
+          <a data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="delete" onclick="cancelBack('formco')" >Cancel</a>
+         </div>
+       </div>
+      </form>
+   </div>
+  </div>
+  </div>
+  
+  
+<!--View Business report --->
+
+
+ <div data-role="page" id="BusinessReport" >
+
+    <div data-role="header" class="header">
+     
+      <h1>Businesses Report</h1>
+   
+    </div>
+  <a href="#" id="business" ></a>
+  <div id="content">     
+    <form>
+      <fieldset class="report-fs">
+        <p id="thebusinesses" >
+        </p>
+      </fieldset>
+    </form>
+  </div>
+</div>
+</div>
+
+<!--View KPI--->
+ <div data-role="page" id="kpilistV" >
+
+    <div data-role="header" class="header">
+     
+      <h1> Report</h1>
+   
+    </div>
+  <a href="#" id="kpivalue" ></a>
+  <div id="content">     
+    <form>
+      <fieldset class="report-fs">
+        <p id="kpilistview" >
+        </p>
+      </fieldset>
+	  <a data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="delete" onclick="getSelectedChx()" >Submit</a>
+        
+    </form>
+  </div>
+</div>
+</div>
+
+<!-- Generate Admin Company Report -->
+<div data-role="page" id="generateadmincompanyReport" action="" method=""  >
+
+    <div data-role="header" class="header">
+    
+      <h1>Generate Company Report</h1>
+   
+    </div>
+  
+   <div data-role="content1">  
+      <form action="" method="post" name="formi" id="formi">
+         <div data-role="fieldcontain"> 
+     
+        <label for="year" align="right"> From Year<span id="star">*</span> :  </label>
+          <select id="fromyeari" name="fromyeari" required>
+      <option value=""> Please select </option>
+			  <option value=""> 2016 </option>
+			  <option value=""> 2017 </option>	
+			  <option value=""> 2018 </option>	
+			  <option value=""> 2019 </option>	
+			  <option value=""> 2020 </option>
+          </select><br/><br/><br/>
+        <label for="year" align="right"> To Year<span id="star">*</span> :  </label>
+          <select id="toyeari" name="toyeari" required>
+          <option value=""> Please select </option>
+			  <option value=""> 2016 </option>
+			  <option value=""> 2017 </option>	
+			  <option value=""> 2018 </option>	
+			  <option value=""> 2019 </option>	
+			  <option value=""> 2020 </option>
+          </select><br/><br/><br/>    
+        <label for="txtcompanyuserreport" align="right"> Company(Optional) : </label>        
+           <select id="txtcompanyuserreport" name="txtcompanyuserreport">
+            <option >Please select</option>
+           </select><br/><br/><br/>
+   
+        </div>       
+       <div class="save-cancel-button">
+           <a data-role="button"   onclick="checkadminindustry()" class="button" data-iconpos="right" data-inline="true" data-icon="check" name="submit" type="submit">Generate Report</a>
+           <a data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="delete" onclick="cancelBack('formi')">Cancel</a>
+        </div>
+      </form>
+
+   </div>
+  </div>
+   
+<!-- Admin Industry Report Page-->
+  <div data-role="page" id="IndustryReport" >
+
+    <div data-role="header" class="header">
+     
+      <h1>Industry Report</h1>
+   
+    </div>
+  <a href="#" id="industry" ></a>
+  <div id="content">     
+    <form>
+      <fieldset class="report-fs">
+        <p id="theindustry" >
+        </p>
+      </fieldset>
+    </form>
+  </div>
+  <div data-role="content">
+      <div id="editor3"></div>
+      <!-- <div id="editor4"></div> -->
+      <fieldset class="report-but">
+      <a id="cmd3" data-role="button" class="button-rpt" data-inline="true" >Download as pdf</a>
+      <a id="adminindustrylink" data-role="button" class="button-rpt" data-inline="true" download="CSV name" >Download as csv</a>
+      <a id="emailBtnAI" data-role="button" class="button-rpt" data-inline="true" >Email the PDF</a>
+      <a href="#Report" data-role="button" class="button-rpt" data-inline="true" >Cancel</a>
+    </fieldset>
+    </div>
+  </div>
+   
+<!-- Generate Admin Province Report -->
+<div data-role="page" id="generateadminprovinceReport" action="" method=""  >
+
+    <div data-role="header" class="header">
+  
+   
+      <h1>Generate Province Report</h1>
+     
+    </div>
+   <div data-role="content2">  
+      <form action="" method="post" name="formp" id="formp">
+         <div data-role="fieldcontain"> 
+      <label for="year" align="right"> From Year<span id="star">*</span> :  </label>
+          <select id="fromyearp" name="fromyearp"  required>
+          <option value=""> Please select </option>
+          </select><br/><br/><br/>
+
+      <label for="year" align="right"> To Year<span id="star">*</span> :  </label>
+          <select id="toyearp" name="toyearp"  required>
+          <option value=""> Please select </option>
+          </select><br/><br/><br/>
+
+        <label for="txtdef" align="right"> Province(Optional) :  </label>
+          <select id="pro" name="pro"  required>
+          <option value=""> Please select </option>
+          </select><br/><br/><br/>
+
+      <label for="txtdef" align="right"> Status(Optional) :  </label>
+          <select id="status" name="status">
+               <option value="">Please select</option>
+               <option value="active">Active</option>
+               <option value="inactive">Inactive</option>
+      </select>
+      
+        </div>    
+        <div class="save-cancel-button">
+           <a data-role="button"  onclick="checkadminprovince()" class="button" data-iconpos="right" data-inline="true" data-icon="check" name="submit" type="submit" >Generate Report</a>
+           <a data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="delete" onclick="cancelBack('formp')">Cancel</a>
+        </div>
+
+      </form>
+   </div>
+</div>
+   
+<!-- Admin Province Report Page-->
+
+  <div data-role="page" id="ProvinceReport" >
+
+    <div data-role="header" class="header">
+  
+      <h1>Province Report</h1>
+      
+    </div>
+
+  <a href="#" id="province" ></a>
+  <div id="content">     
+   <form>
+     <fieldset class="report-fs">
+       <p id="theprovince" >
+       </p>
+     </fieldset>
+   </form>
+  </div>
+  <div data-role="content">
+      <div>
+      <div id="editor1"></div>
+      <fieldset class="report-but">
+      <a id="cmd1" data-role="button" class="button-rpt" data-inline="true" >Download as pdf</a>
+      <a id="adminprovincelink" data-role="button" class="button-rpt" data-inline="true" download="CSV name" >Download as csv</a>
+      <a id="emailBtnAP" data-role="button" class="button-rpt" data-inline="true" >Email the PDF</a>
+      <a href="#Report" data-role="button" class="button-rpt" data-inline="true" >Cancel</a>
+    </fieldset>
+    </div>
+  </div>
+   </div>
+   
+<!-- Generate Admin Country Report -->
+<div data-role="page" id="generateadmincountryReport" action="" method=""  >
+
+    <div data-role="header" class="header">
+  
+         
+      <h1>Generate Country Report</h1>
+     
+    </div>
+  
+   <div data-role="content3">  
+     <form action="" method="post" name="formc" id="formc">
+           <div data-role="fieldcontain"> 
+           
+       <label for="year" align="right"> From Year<span id="star">*</span> :  </label>
+          <select id="fromyearc" name="fromyearc"  required>
+          <option value=""> Please select </option>
+          </select><br/><br/><br/>
+      <label for="year" align="right"> To Year<span id="star">*</span> :  </label>
+          <select id="toyearc" name="toyearc"  required>
+          <option value=""> Please select </option>
+          </select><br/><br/><br/>
+           <label for="txtdef" align="right"> Country(Optional) :  </label>
+           <select id="con" name="con">
+               <option value="">Please select</option>
+               <option value="Canada">Canada</option>
+        </select><br/><br/><br/>
+       <label for="txtdef" align="right"> Status(Optional) :  </label>
+           <select id="status1" name="status1">
+               <option value="">Please select</option>
+               <option value="active">Active</option>
+               <option value="inactive">Inactive</option>
+       </select>
+    </div>    
+    
+        <div class="save-cancel-button">
+           <a data-role="button"  onclick="checkadmincountry()" class="button" data-iconpos="right" data-inline="true" data-icon="check" name="submit" type="submit">Generate Report</a>
+           <a data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="delete" onclick="cancelBack('formc')">Cancel</a>
+        </div>
+
+      </form>
+   </div>
+  </div>
+   
+<!-- Admin Country Report Page-->
+  <div data-role="page" id="CountryReport" action="" method=""  >
+
+    <div data-role="header" class="header">
+      <h1>Country Report</h1>
+    </div>
+  
+  <a href="#" id="country" ></a>
+  <div id="content">   
+  <form>
+     <fieldset class="report-fs">
+       <p id="thecountry" >
+        </p>
+     </fieldset>
+   </form>
+  </div>
+
+    <div id="editor"></div>
+    <fieldset class="report-but">
+    <a id="cmd2" data-role="button" class="button-rpt" data-inline="true" >Download as pdf</a>
+    <a id="admincountrylink" data-role="button" class="button-rpt" data-inline="true" download="CSV name" >Download as csv</a>
+    <a id="emailBtnA" data-role="button" class="button-rpt" data-inline="true" >Email the PDF</a>
+    <a href="#Report" data-role="button" class="button-rpt" data-inline="true" >Cancel</a>   
+    </fieldset>            
+  </div>
+  
+<!-- Admin Email Conformation-->
+  <div data-role="page" id="adminemail" action="" method="">
+
+    <div data-role="header" class="header">
+      <h1>Email Sent</h1>
+    </div>
+
+  <div class="email_div">
+  <b><p>Report has been sent to your email address.</p></b>
+  <a data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="arrow-l" href="#Report" >Back to Reports</a>
+  </div>
+ </div>
+
+<!-- User Report page -->
+<div data-role="page" id="userReport" >
+
+    <div data-role="header" class="header">
+      <a href="#userMenu" class="menu" data-role="button" data-iconpos="right"  data-icon="bars">Menu</a> 
+      <h1>User Report page</h1>
+      <a onclick="logout()" data-role="button" id="btnlogout" data-icon="carat-d" data-iconpos="right">log out</a>
+    </div>    
+    <div data-role="content">
+      <form id="frmReport" action=""> 
+      <fieldset class="report_fs">  
+      <div>             
+        <a href="#generateusercoopReport" class="reportBut"  data-role="button" data-iconpos="right"  data-icon="bars">Co-operative</a>
+        <a href="#generateuserindustryReport" class="reportBut" data-role="button" data-iconpos="right"  data-icon="bars">Industry</a>
+        <a href="#generateuserprovinceReport" class="reportBut" data-role="button" data-iconpos="right"  data-icon="bars">Province</a>
+        <a href="#generateusercountryReport" class="reportBut" data-role="button" data-iconpos="right"  data-icon="bars">Country</a>
+        
+  </div>
+</fieldset>
+
+</form>
+   </div>
+  </div>
+  
+<!-- Generate User Coop Report -->
+<div data-role="page" id="generateusercoopReport" action="" method=""  >
+ 
+    <div data-role="header" class="header">
+  
+      
+      <h1>Generate Cooperative Report</h1>
+      
+    </div>
+  
+   <div data-role="content">  
+      <form action="" method="post" name="formuco" id="formuco">
+      <div>
+         <div data-role="fieldcontain">
+      <label for="year" align="right"> From Year<span id="star">*</span> :  </label>
+          <select id="fromyearuco" name="fromyearuco"  required>
+          <option value=""> Please select </option>
+          </select><br/><br/><br/>
+      <label for="year" align="right"> To Year<span id="star">*</span> :  </label>
+          <select id="toyearuco" name="toyearuco"  required>
+          <option value=""> Please select </option>
+          </select><br/><br/><br/>
+        </div>    
+    
+         <div class="save-cancel-button">
+           <a data-role="button"  onclick="checkusercooperative()" class="button" data-iconpos="right" data-inline="true" data-icon="check" name="submit" type="submit">View My Report</a>
+           <a data-role="button"  onclick="checkallusercooperative()" class="button" data-iconpos="right" data-inline="true" data-icon="check" name="submit" type="submit" >View All Users Report</a>
+           <a data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="delete" onclick="cancelBack('formuco')">Cancel</a>
+        </div>
+  </div></form>
+   </div>
+  
+  </div>
+  
+<!-- User Cooperative Report -->
+<div data-role="page" id="UserCooperativeReport" action="" method=""  >
+
+    <div data-role="header" class="header">
+  
+        
+      <h1>Cooperative Report</h1>
+     
+    </div>
+ 
+  <a href="#" id="usercooperative" ></a>
+  <div id="content10">  
+   <form>
+    <fieldset class="report-fs">   
+       <p id="theusercooperative" >
+        </p>
+    </fieldset>
+   </form>
+  </div>
+   <div id="editor10"></div>
+   <fieldset class="report-but">
+   <a id="cmd10" data-role="button" class="button-rpt" data-inline="true" >Download as pdf</a>
+   <a id="usercooplink" data-role="button" class="button-rpt" data-inline="true" download="CSV name" >Download as csv</a>
+   <a id="emailBtnC" data-role="button" class="button-rpt" data-inline="true" >Email the PDF</a>
+   <a href="#UserReport" data-role="button" class="button-rpt" data-inline="true" >Cancel</a>
+ </fieldset>
+  </div>
+  
+<!-- All User Cooperative Report -->
+<div data-role="page" id="allUserCooperativeReport" action="" method=""  >
+
+    <div data-role="header" class="header">
+  
+   
+      <h1>Cooperative Report</h1>
+     
+    </div>
+ 
+  <a href="#" id="userallcooperative" ></a>
+  <div id="content20">
+          
+    <form>
+     <fieldset class="report-fs"> 
+       <p id="theallusercooperative" >
+         </p>
+     </fieldset>
+    </form>
+  </div>
+  <div id="editor20"></div>
+  <fieldset class="report-but">
+   <a id="cmd20" data-role="button" class="button-rpt" data-inline="true" >Download as pdf</a>
+   <a id="usercooplink15" data-role="button" class="button-rpt" data-inline="true" download="CSV name" >Download as csv</a>
+   <a id="emailBtnaaC" data-role="button" class="button-rpt" data-inline="true" >Email the PDF</a>
+   <a href="#UserReport" data-role="button" class="button-rpt" data-inline="true" >Cancel</a>  
+   </fieldset>        
+  </div>
+  
+<!-- Generate User Industry Report -->
+<div data-role="page" id="generateuserindustryReport" action="" method=""  >
+  
+
+    <div data-role="header" class="header">
+  
+    
+      <h1>Generate Industry Report</h1>
+    
+    </div>
+  
+   <div data-role="content">  
+     <form action="" method="post" name="formui" id="formui">
+      <div>
+         <div data-role="fieldcontain"> 
+          <label for="year" align="right"> From Year<span id="star">*</span> :  </label>
+          <select id="fromyearui" name="fromyearui"  required>
+          <option value=""> Please select </option>
+          </select><br/><br/><br/>
+      <label for="year" align="right"> To Year<span id="star">*</span> :  </label>
+          <select id="toyearui" name="toyearui"  required>
+          <option value=""> Please select </option>
+          </select><br/><br/><br/>
+      
+        </div>    
+    
+          <div class="save-cancel-button">
+        <a data-role="button"  onclick="checkuserindustry()" class="button" data-iconpos="right" data-inline="true" data-icon="check" name="submit" type="submit" >View My Report</a>
+       <a data-role="button"  onclick="checkalluserindustry()" class="button" data-iconpos="right" data-inline="true" data-icon="check" name="submit" type="submit" >View All Users Report</a>
+        <a data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="delete" onclick="cancelBack('formui')">Cancel</a>
+
+        </div>
+     </div>
+      </form>
+   </div>
+</div>
+  
+<!-- User Industry Report -->
+<div data-role="page" id="UserIndustryReport" action="" method=""  >
+  
+
+    <div data-role="header" class="header">
+  
+      
+      <h1>Industry Report</h1>
+     
+    </div>
+  
+  <a href="#" id="userindustry" ></a>
+  <div id="content11">      
+    <form>
+     <fieldset class="report-fs">  
+       <p id="theuserindustry" >
+         </p>
+     </fieldset>
+    </form>
+  </div>
+  <div id="editor11"></div>
+  <fieldset class="report-but">
+   <a id="cmd11" data-role="button" class="button-rpt" data-inline="true" >Download as pdf</a>
+   <a id="userindustrylink" data-role="button" class="button-rpt" data-inline="true" download="CSV name" >Download as csv</a>
+   <a id="emailBtnI" data-role="button" class="button-rpt" data-inline="true" >Email the PDF</a>
+   <a href="#UserReport" data-role="button" class="button-rpt" data-inline="true" >Cancel</a>
+  </fieldset>      
+  </div>
+
+<!-- All User Industry Report -->
+<div data-role="page" id="ShowallUserIndustryReport" action="" method=""  >
+  
+
+    <div data-role="header" class="header">
+  
+     
+      <h1>All Users Industry Report</h1>
+     
+    </div>
+  
+  <a href="#" id="userindustry15" ></a>
+  <div id="content15">       
+    <form>
+      <fieldset class="report-fs">
+        <p id="theuserindustry15"> 
+         </p>
+      </fieldset>
+    </form>
+  </div>
+  <div id="editor15"></div>
+  <fieldset class="report-but">
+   <a id="cmd15" data-role="button" class="button-rpt" data-inline="true" >Download as pdf</a>
+   <a id="userindustrylink15" data-role="button" class="button-rpt" data-inline="true" download="CSV name" >Download as csv</a>
+   <a id="emailBtnSI" data-role="button" class="button-rpt" data-inline="true" >Email the PDF</a>
+   <a href="#UserReport" data-role="button" class="button-rpt" data-inline="true" >Cancel</a>
+   </fieldset> 
+  </div>  
+  
+<!-- Generate User Province Report -->
+<div data-role="page" id="generateuserprovinceReport" action="" method=""  >
+    <div data-role="header" class="header">
+      <h1>Generate Province Report</h1>
+    
+    </div>
+  
+   <div data-role="content">  
+      <form action="" method="post" name="formup" id="formup" >
+      <div>
+         <div data-role="fieldcontain">
+      <label for="year" align="right"> From Year<span id="star">*</span> :  </label>
+          <select id="fromyearup" name="fromyearup"  required>
+          <option value=""> Please select </option>
+          </select><br/><br/><br/>
+      <label for="year" align="right"> To Year<span id="star">*</span> :  </label>
+          <select id="toyearup" name="toyearup"  required>
+          <option value=""> Please select </option>
+          </select><br/><br/><br/>
+        </div>    
+          <div class="save-cancel-button">
+        <a data-role="button"  onclick="checkuserprovince()" class="button" data-iconpos="right" data-inline="true" data-icon="check" name="submit" type="submit" >View My Report</a>
+        <a data-role="button"  onclick="checkalluserprovince()"  class="button" data-iconpos="right" data-inline="true" data-icon="check" name="submit" type="submit" >View All Users Report</a>
+        <a data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="delete" onclick="cancelBack('formup')">Cancel</a>
+         </div>
+  </div></form>
+   </div>
+  
+  </div>
+  
+<!-- User Province report page -->
+<div data-role="page" id="UserProvinceReport" action="" method=""  >
+    <div data-role="header" class="header">
+      <h1>Province Report</h1>
+    </div>
+  
+  <a href="#" id="userprovince" ></a>
+  <div id="content12">      
+    <form>
+     <fieldset class="report-fs">   
+      <p id="theuserprovince"> 
+        </p>
+    
+      </fieldset>
+    </form>
+  </div>
+  <div id="editor12"></div>
+  <fieldset class="report-but">
+   <a id="cmd12" data-role="button" class="button-rpt" data-inline="true" >Download as pdf</a>
+   <a id="userprovincelink" data-role="button" class="button-rpt" data-inline="true" download="CSV name" >Download as csv</a>
+   <a id="emailBtnP" data-role="button" class="button-rpt" data-inline="true" >Email the PDF</a>
+   <a href="#UserReport" data-role="button" class="button-rpt" data-inline="true" >Cancel</a>
+ </fieldset>
+  </div>
+  
+<!-- User Province All Users report page -->
+<div data-role="page" id="ShowallUsersProvinceReport" action="" method=""  >
+    <div data-role="header" class="header">
+        
+      <h1>Province All Users Report</h1>
+     
+    </div>
+  
+  <a href="#" id="userprovince14" ></a>
+  <div id="content14">
+   <form>
+     <fieldset class="report-fs">  
+       <p id="theuserprovince14" >
+        </p>
+     </fieldset>
+   </form>
+  </div>
+  <div id="editor14"></div>
+   <fieldset class="report-but">
+   <a id="cmd14" data-role="button" class="button-rpt" data-inline="true" >Download as pdf</a>
+   <a id="userprovincelink14" data-role="button" class="button-rpt" data-inline="true" download="CSV name" >Download as csv</a>
+   <a id="emailBtnaaP" data-role="button" class="button-rpt" data-inline="true" >Email the PDF</a>
+   <a href="#UserReport" data-role="button" class="button-rpt" data-inline="true" >Cancel</a>
+ </fieldset>
+  </div>
+  
+<!-- Generate User Country Report -->
+<div data-role="page" id="generateusercountryReport" action="" method=""  >
+
+    <div data-role="header" class="header">
+      <h1>Generate Country Report</h1>
+    </div>
+  
+   <div data-role="content">  
+      <form action="" method="post" name="formuc" id="formuc">
+      <div>
+         <div data-role="fieldcontain">
+      <label for="year" align="right"> From Year<span id="star">*</span> :  </label>
+          <select id="fromyearuc" name="fromyearuc"  required>
+          <option value=""> Please select </option>
+          </select><br/><br/><br/>
+      <label for="year" align="right"> To Year<span id="star">*</span> :  </label>
+          <select id="toyearuc" name="toyearuc"  required>
+          <option value=""> Please select </option>
+          </select><br/><br/><br/>
+    </div>    
+          <div class="save-cancel-button">  
+           <a data-role="button"  onclick="checkusercountry()"  class="button" data-iconpos="right" data-inline="true" data-icon="check" name="submit" type="submit" >Generate Report</a>
+            <a data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="delete" onclick="cancelBack('formuc')">Cancel</a>
+        </div>
+  </div></form>
+   </div>
+  </div>
+  
+<!-- User Country report page -->
+<div data-role="page" id="UserCountryReport" action="" method=""  >
+
+
+
+    <div data-role="header" class="header">
+  
+ 
+      <h1>Country Report</h1>
+    
+    </div>
+  
+  
+  <a href="#" id="usercountry" ></a>
+  <div id="content13">      
+   <form>
+    <fieldset class="report-fs">
+      <p id="theusercountry">
+        </p>
+    </fieldset>
+   </form>
+ </div>
+  <div id="editor13"></div>
+   <fieldset class="report-but">
+   <a id="cmd13" data-role="button" class="button-rpt" data-inline="true" >Download as pdf</a>
+   <a id="usercountrylink" data-role="button" class="button-rpt" data-inline="true" download="CSV name" >Download as csv</a>
+   <a id="emailBtn" data-role="button" class="button-rpt" data-inline="true" >Email the PDF</a>
+   <a href="#UserReport" data-role="button" class="button-rpt" data-inline="true" >Cancel</a>
+   </fieldset>
+  </div>
+
+<!-- User Email Conformation-->
+  <div data-role="page" id="useremail" action="" method=""  >
+
+    <div data-role="header" class="header">
+      <h1>Email Sent</h1>
+     
+    </div>
+  <div class="email_div">
+  <b><p>Report has been sent to your email address.</p></b>
+  <a data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="arrow-l" href="#UserReport" >Back to Reports</a>
+  </div>
+  </div> 
+
+  <!-- Admin Download Database Page-->
+  <div data-role="page" id="downloadDB" >
+
+    <div data-role="header" class="header">
+      <a href="#adminMenu" class="menu" data-role="button"  data-iconpos="right"  data-icon="bars">Menu</a>
+      <h1>Download Database</h1>
+      <a onclick="logout()" data-role="button"  id="btnlogout" data-icon="carat-d" data-iconpos="right">log out</a>      
+    </div>
+    <div class="download_div">
+      <a id="downloadLink"></a>
+      <form id="" method="">
+    <p>Please first insert password then press the button to download database</p>
+    <input type="password" id="downpass" placeholder="Download Password" autofocus required></input>
+    <a data-role="button" class="button" data-iconpos="right" data-inline="true" data-icon="arrow-d" id="btndownload"  >Download Database</a>
+    </form>
+    </div>
+  </div>  
+
+
+
+</body>
+</html>
+
+
